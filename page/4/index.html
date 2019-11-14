@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>lrouter的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="简单往往并不简单">
+<meta name="keywords" content="云计算 linux">
+<meta property="og:type" content="website">
+<meta property="og:title" content="lrouter的博客">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;page&#x2F;4&#x2F;index.html">
+<meta property="og:site_name" content="lrouter的博客">
+<meta property="og:description" content="简单往往并不简单">
+<meta property="og:locale" content="cn-zh">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="lrouter的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">lrouter的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-02_java/2016_04_09-JSP客户端请求" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/02_java/2016_04_09-JSP%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%B7%E6%B1%82/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.488Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/14/02_java/2016_04_09-JSP%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%B7%E6%B1%82/">02_java/2016_04_09-JSP客户端请求</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="HTTP头部信息"><a href="#HTTP头部信息" class="headerlink" title="HTTP头部信息"></a>HTTP头部信息</h2><p>客户端浏览器发出的HTTP请求，会带有一个HTTP头部，该头部包含以下信息，这些信息贯穿了JAVA WEB编程的所有项目：</p>
+<table>
+<thead>
+<tr>
+<th align="left">信息</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Accept</td>
+<td>指定浏览器或其他客户端可以处理的MIME类型。它的值通常为 image/png 或 image/jpeg</td>
+</tr>
+<tr>
+<td align="left">Accept-Charset</td>
+<td>指定浏览器要使用的字符集。比如 ISO-8859-1</td>
+</tr>
+<tr>
+<td align="left">Accept-Encoding</td>
+<td>指定编码类型。它的值通常为 gzip 或compress</td>
+</tr>
+<tr>
+<td align="left">Accept-Language</td>
+<td>指定客户端首选语言，servlet会优先返回以当前语言构成的结果集，如果servlet支持这种语言的话。比如 en，en-us，ru等等</td>
+</tr>
+<tr>
+<td align="left">Authorization</td>
+<td>在访问受密码保护的网页时识别不同的用户</td>
+</tr>
+<tr>
+<td align="left">Connection</td>
+<td>表明客户端是否可以处理HTTP持久连接。持久连接允许客户端或浏览器在一个请求中获取多个文件。Keep-Alive 表示启用持久连接</td>
+</tr>
+<tr>
+<td align="left">Content-Length</td>
+<td>仅适用于POST请求，表示 POST 数据的字节数</td>
+</tr>
+<tr>
+<td align="left">Cookie</td>
+<td>返回先前发送给浏览器的cookies至服务器</td>
+</tr>
+<tr>
+<td align="left">Host</td>
+<td>指出原始URL中的主机名和端口号</td>
+</tr>
+<tr>
+<td align="left">If-Modified-Since</td>
+<td>表明只有当网页在指定的日期被修改后客户端才需要这个网页。 服务器发送304码给客户端，表示没有更新的资源</td>
+</tr>
+<tr>
+<td align="left">If-Unmodified-Since</td>
+<td>与If-Modified-Since相反， 只有文档在指定日期后仍未被修改过，操作才会成功</td>
+</tr>
+<tr>
+<td align="left">Referer</td>
+<td>标志着所引用页面的URL。比如，如果你在页面1，然后点了个链接至页面2，那么页面1的URL就会包含在浏览器请求页面2的信息头中</td>
+</tr>
+<tr>
+<td align="left">User-Agent</td>
+<td>用来区分不同浏览器或客户端发送的请求，并对不同类型的浏览器返回不同的内容</td>
+</tr>
+</tbody></table>
+<h2 id="JSP-Request对象"><a href="#JSP-Request对象" class="headerlink" title="JSP Request对象"></a>JSP Request对象</h2><p>Request对象提供了一系列的方法，用来处理客户端请求的HTTP头部信息。包括表单数据，cookies，HTTP方法等等。</p>
+<p>例如：</p>
+<ul>
+<li>String getRemoteHost() 返回客户端的完整名称</li>
+<li>HttpSession getSession() 返回request对应的session对象，如果没有，则创建一个</li>
+<li>boolean isSecure() 返回request是否使用了加密通道，比如HTTPS</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/02_java/2016_04_09-JSP%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%B7%E6%B1%82/" data-id="ck2yu6vsf000g2gtr8fwc9dqa" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-02_java/2016-10-26-Java学习笔记_06_MySql学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/02_java/2016-10-26-Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_06_MySql%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.486Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/14/02_java/2016-10-26-Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_06_MySql%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">02_java/2016-10-26-Java学习笔记_06_MySql学习笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="什么是MySql数据库"><a href="#什么是MySql数据库" class="headerlink" title="什么是MySql数据库"></a>什么是MySql数据库</h2><p>关系型数据库</p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="整形"><a href="#整形" class="headerlink" title="整形"></a>整形</h3><h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><h3 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h3><h3 id="日期"><a href="#日期" class="headerlink" title="日期"></a>日期</h3><h2 id="数据类型的选择规则"><a href="#数据类型的选择规则" class="headerlink" title="数据类型的选择规则"></a>数据类型的选择规则</h2><h3 id="占用内存空间最小"><a href="#占用内存空间最小" class="headerlink" title="占用内存空间最小"></a>占用内存空间最小</h3><h3 id="简单数据类型优先"><a href="#简单数据类型优先" class="headerlink" title="简单数据类型优先"></a>简单数据类型优先</h3><h3 id="内置数据类型优先"><a href="#内置数据类型优先" class="headerlink" title="内置数据类型优先"></a>内置数据类型优先</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/02_java/2016-10-26-Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_06_MySql%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" data-id="ck2yu6vsh000j2gtr5zq39cnt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-02_java/2016-10-26-Java学习笔记_05_JSP的Config对象" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/02_java/2016-10-26-Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_05_JSP%E7%9A%84Config%E5%AF%B9%E8%B1%A1/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.483Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/14/02_java/2016-10-26-Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_05_JSP%E7%9A%84Config%E5%AF%B9%E8%B1%A1/">02_java/2016-10-26-Java学习笔记_05_JSP的Config对象</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="什么是config对象"><a href="#什么是config对象" class="headerlink" title="什么是config对象"></a>什么是config对象</h2><p>config对象主要是用来配置servelet用的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/02_java/2016-10-26-Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_05_JSP%E7%9A%84Config%E5%AF%B9%E8%B1%A1/" data-id="ck2yu6vs8000d2gtrci159dft" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-02_java/2016-10-26-Java学习笔记_04_JSP的session和cookie" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/02_java/2016-10-26-Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_04_JSP%E7%9A%84session%E5%92%8Ccookie/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.481Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/14/02_java/2016-10-26-Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_04_JSP%E7%9A%84session%E5%92%8Ccookie/">02_java/2016-10-26-Java学习笔记_04_JSP的session和cookie</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="什么是cookie-？"><a href="#什么是cookie-？" class="headerlink" title="什么是cookie ？"></a>什么是cookie ？</h2><h2 id="什么是session-？"><a href="#什么是session-？" class="headerlink" title="什么是session ？"></a>什么是session ？</h2><p><a href="https://www.cnblogs.com/zhouhbing/p/4204132.html" target="_blank" rel="noopener">如何使用Cookie和Session</a></p>
+<h2 id="JSP中如何操作cookie-？"><a href="#JSP中如何操作cookie-？" class="headerlink" title="JSP中如何操作cookie ？"></a>JSP中如何操作cookie ？</h2><p><a href="http://www.runoob.com/jsp/jsp-cookies.html" target="_blank" rel="noopener">JSP操作Cookie</a></p>
+<h2 id="JSP中如何操作session-？"><a href="#JSP中如何操作session-？" class="headerlink" title="JSP中如何操作session ？"></a>JSP中如何操作session ？</h2><p><a href="http://www.runoob.com/jsp/jsp-session.html" target="_blank" rel="noopener">JSP操作Session</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/02_java/2016-10-26-Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_04_JSP%E7%9A%84session%E5%92%8Ccookie/" data-id="ck2yu6vs9000e2gtreu1j1gwv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-02_java/2016-10-25-JAVA学习笔记03_对象的相等比较" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/02_java/2016-10-25-JAVA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B003_%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%9B%B8%E7%AD%89%E6%AF%94%E8%BE%83/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.478Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/14/02_java/2016-10-25-JAVA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B003_%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%9B%B8%E7%AD%89%E6%AF%94%E8%BE%83/">02_java/2016-10-25-JAVA学习笔记03_对象的相等比较</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一-比较对象的两种方法"><a href="#一-比较对象的两种方法" class="headerlink" title="一. 比较对象的两种方法"></a>一. 比较对象的两种方法</h2><p>比较对象是否相等有两种方法：</p>
+<ul>
+<li>使用==运算符</li>
+<li>使用equals方法</li>
+</ul>
+<h3 id="1-运算符"><a href="#1-运算符" class="headerlink" title="1. ==运算符"></a>1. ==运算符</h3><p>==运算符，比较的是两个对象引用的值是否相等，也就是判断两个对象引用是否引用的是同一个对象。</p>
+<p>例子1：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String str1 = <span class="keyword">new</span> String(<span class="string">"Hello"</span>);</span><br><span class="line">String str2 = <span class="keyword">new</span> String(<span class="string">"Hello"</span>);</span><br><span class="line">System.out.println(str1 == str2);</span><br></pre></td></tr></table></figure>
+
+<p>最后输出的结果是false。</p>
+<p>因为str1和str2是两个变量，是两个不同的String对象的引用。这两个String对象，在内存的堆上都有自己独立的位置。</p>
+<p>结果str1和str2引用的是不同的两个对象，str1和str2的值并不相等。</p>
+<h3 id="2-equals方法"><a href="#2-equals方法" class="headerlink" title="2. equals方法"></a>2. equals方法</h3><p>equals方法是Object类中的方法。Object是Java中所有类的父类，所以所有类都有这个方法。</p>
+<p>Object类中的equals方法，比较的是两个对象引用的值是否相等，也就是判断两个对象引用是否引用的是同一个对象。和==运算符是一样的。</p>
+<p>但是这并不是我们想要的。</p>
+<h2 id="真正想要的结果"><a href="#真正想要的结果" class="headerlink" title="真正想要的结果"></a>真正想要的结果</h2><p>那么我们在比较两个是否相等时，我们真正想要的结果是什么？我们判断的依据又是什么呢？</p>
+<p>还是以上面的例子1为例来说明。</p>
+<p>在比较变量str1和str2引用的两个对象时，两个对象的内容都是”Hello”字符串。我们希望这两个对象是相等的。</p>
+<p>再看例子2：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> String name;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> high;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">Student</span><span class="params">(String name, <span class="keyword">int</span> age, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.high = high;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.age;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getHigh</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.high;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">setHigh</span><span class="params">(<span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.high = high;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test01</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Student stu1 = <span class="keyword">new</span> Student(<span class="string">"xiaoWang"</span>, <span class="number">12</span>, <span class="number">130</span>);</span><br><span class="line">    Student stu2 = <span class="keyword">new</span> Student(<span class="string">"xiaoWang"</span>, <span class="number">12</span>, <span class="number">130</span>);</span><br><span class="line">    </span><br><span class="line">    System.out.println(stu1.equals(stu2));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们希望程序的输出结果是什么呢？我们希望输出true。因为stu1和stu2的name，age和high都是一样的。</p>
+<p>也就是说希望在使用equals方法时，比较的是两个对象的状态是否相等。对象状态，指的就是对象的所有属性的值。</p>
+<h2 id="重写equals方法"><a href="#重写equals方法" class="headerlink" title="重写equals方法"></a>重写equals方法</h2><p>我们希望在使用equals方法时，比较的是两个对象的状态是否相等。<br>但是从Oject类继承的equals方法，比较的是两个对象引用的是否是同一个对象。<br>因此我们需要在创建自己类的时候，重写equals方法使得在比较对象时，比较的是对象的状态而不是对象的引用。</p>
+<p>如果两个对象引用同一个对象，那么使用equals比较对象状态时肯定是判断相等，因为他们指向的是同一个对象啊！</p>
+<p>String类就是重写了equals方法。</p>
+<p>例如我们可以在Student类中重写equals方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equal</span><span class="params">(Object otherObject)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// a quick test to see if the objects are identical</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> == otherObject) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// must return false if the explicit parameter is null</span></span><br><span class="line">    <span class="keyword">if</span> (otherObject == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// if the classes don't match, they can't be equal</span></span><br><span class="line">    <span class="keyword">if</span>(getClass() != otherObject.getClass())</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">      </span><br><span class="line">    <span class="comment">// now we know otherObject is a non-null Student</span></span><br><span class="line">    Student other = (Student) otherObject;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//test whether the fields have identical values</span></span><br><span class="line">    <span class="keyword">return</span> name.equals(other.getName()) </span><br><span class="line">      &amp;&amp; age == other.getAge()</span><br><span class="line">      &amp;&amp; high == other.getHigh();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在重写的方法中：</p>
+<ul>
+<li><p>第一步，先比较两个对象引用是否相等，如果是就返回true。如果不是，就继续往下看。</p>
+</li>
+<li><p>第二步，看otherObject是否为null，如果是就返回false。如果不是，继续往下看。</p>
+</li>
+<li><p>第三步，看两个对象引用的对象，是否是同一类型。如果不是就返回false。</p>
+<pre><code>这一步使用的是getClass方法，而不是instanceof，因为instanceof用于判断对象是否是某个类，或者是该类的子类的实例。例如stu1是Student类也是            Object类的实例。</code></pre></li>
+<li><p>第四步，依次比较两个对象的所有属性的值是否相等。</p>
+</li>
+</ul>
+<h2 id="推荐使用的方法"><a href="#推荐使用的方法" class="headerlink" title="推荐使用的方法"></a>推荐使用的方法</h2><p>推荐重写equals方法，然后使用equals方法来比较对象是否相等。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/02_java/2016-10-25-JAVA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B003_%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%9B%B8%E7%AD%89%E6%AF%94%E8%BE%83/" data-id="ck2yu6vs5000b2gtre4c47ej6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-02_java/2016-10-18-JAVA数据结构" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/02_java/2016-10-18-JAVA%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.475Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/14/02_java/2016-10-18-JAVA%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">02_java/2016-10-18-JAVA数据结构</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>数据由什么成分构成，由什么方式组成什么样的结构。</p>
+<p>数据：是程序的操作对象，用于描述客观事物。<br>数据的特点：</p>
+<ul>
+<li>可以</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/02_java/2016-10-18-JAVA%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" data-id="ck2yu6vs100082gtrhbfc5z8b" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-02_java/2016-10-16-JSP介绍" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/02_java/2016-10-16-JSP%E4%BB%8B%E7%BB%8D/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.472Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/14/02_java/2016-10-16-JSP%E4%BB%8B%E7%BB%8D/">02_java/2016-10-16-JSP介绍</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="JSP概述"><a href="#JSP概述" class="headerlink" title="JSP概述"></a>JSP概述</h2><p>什么是JSP?</p>
+<p>down vote<br>accepted<br>Short answer:</p>
+<p>JSP is runs on the server whereas javascript runs on the client.</p>
+<p>Long answer:</p>
+<p>JSP (JavaServer Pages) is a Java technology for creating dynamic web pages which is deployed by a servlet container. Both are run server-side and require a webhost of some kind (e.g., Tomcat). At runtime, jsp files will be compiled into servlets and executed when requested. It is comparable to languages such as PHP or ASP. JSP can be described as a technology for changing the contents of a page.<br>Javascript is a scripting language that is run on the client. Its use is primarily for updating the DOM or dynamically fetching/sending data. Javascript can be described as a technology which changes the behavior or presentation of a page.</p>
+<p>JSP拥有JAVA语言的所有特性：<br>面向对象；<br>多线程；<br>健壮;</p>
+<p>JSP运行JSP容器中：Tomcat，Jetty</p>
+<p>JSP -&gt; Serverlet -&gt; Class文件</p>
+<h2 id="JSP历史"><a href="#JSP历史" class="headerlink" title="JSP历史"></a>JSP历史</h2><h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><h2 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h2><h2 id="URN"><a href="#URN" class="headerlink" title="URN"></a>URN</h2><p>Uniform Resource Name，代表某个资源独一无二</p>
+<h2 id="URI"><a href="#URI" class="headerlink" title="URI"></a>URI</h2><h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><p>超文本传输协议</p>
+<p>发送和接收HTML页面</p>
+<p>特点：</p>
+<ol>
+<li>支持客户和服务器模式</li>
+<li>无连接</li>
+<li>无状态，对于事务处理的结果没有记忆</li>
+</ol>
+<p>方法：<br>GET: 向特定的资源发送请求<br>POST：向特定的服务区发送资源</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/02_java/2016-10-16-JSP%E4%BB%8B%E7%BB%8D/" data-id="ck2yu6vs4000a2gtr5dtwcwmd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-02_java/2016-10-16-java学习笔记_02_JDBC" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/02_java/2016-10-16-java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_02_JDBC/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.470Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/14/02_java/2016-10-16-java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_02_JDBC/">02_java/2016-10-16-java学习笔记_02_JDBC</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h2><p>JDBC就是一项服务，专门针对关系型数据库。</p>
+<p>用户程序</p>
+<p>JAVA</p>
+<p>JDBC（规定了数据连接和操作的接口）</p>
+<p>ORACLE  MYSQL<br>（各种数据库实现了接口）</p>
+<p>JDBC连接数据的两种方式</p>
+<ul>
+<li>JDBC-ODBC</li>
+<li>JDBC连接，程序 -&gt; JDBC -&gt; 数据库</li>
+</ul>
+<p>JDBC网络连接：</p>
+<p>JDBC的所有开发操作都在java.sql包里面。</p>
+<h2 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h2><p>Connection接口:</p>
+<p>public static Connection getConnection(String url,Properties info) throws SQLException</p>
+<p>工厂类屏蔽了各种数据库的驱动，用户程序只要接口和工厂类。</p>
+<h2 id="操作数据库"><a href="#操作数据库" class="headerlink" title="操作数据库"></a>操作数据库</h2><p>###Statement接口:</p>
+<p>Statement createStatement() throws SQLException</p>
+<p>数据库的操作主要有两类：</p>
+<p>更新数据库：int executeUpdate(String sql) throws SQLException，返回更新行数；</p>
+<p>查询数据库：ResultSet executeQuery(String sql) throws SQLException，</p>
+<p>传入sql语句就可以直接返回数据库的结果。对于数据库的返回结果ResultSet，可以使用java语言进行操作。</p>
+<p>不推荐使用Statement接口</p>
+<h2 id="批处理"><a href="#批处理" class="headerlink" title="批处理"></a>批处理</h2><p>JDBC支持对数据库的批处理操作，也就是一次支持多条sql语句的执行。</p>
+<p>###PreparedStatement接口<br>PreparedStatement prepareStatement(String sql) throws SQLException</p>
+<p>数据库的操作主要有两类：</p>
+<p>更新数据库：int executeUpdate() throws SQLException；</p>
+<p>查询数据库：ResultSet executeQuery() throws SQLException；</p>
+<p>sql语句的值，不再硬编码了。在先使用占位符“?” 一个sql语句，基于sql创建PreparedStatement之后，使用setxxx子类的代码设置sql，最后再调用上面的<br>数据库操作函数。</p>
+<h2 id="事务处理"><a href="#事务处理" class="headerlink" title="事务处理"></a>事务处理</h2><p>事务处理，就是批处理里面包含的所有sql语句，要么一起c成功执行，要么一起失败。</p>
+<ul>
+<li>设置是否自动提交 setAutoCommit</li>
+<li>设置提交事务 commit</li>
+<li>回滚 rollback</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/02_java/2016-10-16-java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_02_JDBC/" data-id="ck2yu6vs6000c2gtrc63bdb5x" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-02_java/2016-04-10-Struts2标签" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/02_java/2016-04-10-Struts2%E6%A0%87%E7%AD%BE/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.468Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/14/02_java/2016-04-10-Struts2%E6%A0%87%E7%AD%BE/">02_java/2016-04-10-Struts2标签</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Struts2标签"><a href="#Struts2标签" class="headerlink" title="Struts2标签"></a>Struts2标签</h2><p>Struts2支持很多标签，有代码逻辑控制标签，类似if，else。</p>
+<p>也有设置和取出数据的标签。</p>
+<p>这样开发人员可以直接在xml文件中，使用这些标签来处理请求和回复的数据，以及JAVA Bean属性。就像写JAVA代码一样，但是没有那么繁琐。</p>
+<h2 id="常用标签"><a href="#常用标签" class="headerlink" title="常用标签"></a>常用标签</h2><p>创建数据</p>
+<p>&lt;s:set name=”age” value=”10” scope=”request”/&gt; (scope可以有request. pageContext, session, application几种)</p>
+<p>取出数据</p>
+<p>&lt;s:property /&gt;</p>
+<p>iterator</p>
+<p>&lt;s:iterator/&gt;</p>
+<p>代码逻辑控制</p>
+<p>&lt;s:if test=”value&gt;=60”/&gt;<br>&lt;s:elif test=”value&gt;30” /&gt;<br>&lt;s:else /&gt;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/02_java/2016-04-10-Struts2%E6%A0%87%E7%AD%BE/" data-id="ck2yu6vse000f2gtr7dkd9gwv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-02_java/2016-04-10-Struts2拦截器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/02_java/2016-04-10-Struts2%E6%8B%A6%E6%88%AA%E5%99%A8/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.465Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/14/02_java/2016-04-10-Struts2%E6%8B%A6%E6%88%AA%E5%99%A8/">02_java/2016-04-10-Struts2拦截器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Struts2拦截器"><a href="#Struts2拦截器" class="headerlink" title="Struts2拦截器"></a>Struts2拦截器</h2><p>前面在介绍Struts2的时候，讲到Struts2在客户端的请求和后台Action之间，增加了过滤器。</p>
+<p>其实Struts2还增加了拦截器。</p>
+<p>Struts2的核心就是过滤器和拦截器。这两者负责拦截请求和回复的内容，包括请求的资源、方法等。然后依据拦截，分派给不同的模块去处理。</p>
+<p>拦截器有请求拦截器，方法拦截器等。</p>
+<p>我们可以使用通配符，拦截一类请求的action名字符合要求的请求，将请求分派给某个模块去处理。</p>
+<p>我们可以使用通配符，拦截请求中的某些方法，在拦截的时候做些处理。</p>
+<p>所以在客户端的请求真正到达后端服务器时，我们可以通过拦截器做很多事情，例如对用户是否登录的校验，记录日志等，限制用户只能访问某些资源。</p>
+<h2 id="拦截器的作用范围"><a href="#拦截器的作用范围" class="headerlink" title="拦截器的作用范围"></a>拦截器的作用范围</h2><p>struts2.xml中的每个package是独立的，里面引用的拦截对其他package不会有影响。</p>
+<p>每个package可以引用自己使用到的拦截器。</p>
+<p>##拦截器分组</p>
+<p>我们可以将拦截器进行分组，然后直接引用组名，就可以使用所有的拦截器。拦截器分组的最后，一定要追加defaultStack这个拦截器，这是struts2默认的拦截器。</p>
+<p>如果某个package单独引用了某个拦截器，而不是引用分组，那么只有该拦截器会生效。此时记得在后面追加defaultStack这个拦截器。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/02_java/2016-04-10-Struts2%E6%8B%A6%E6%88%AA%E5%99%A8/" data-id="ck2yu6vs300092gtr8739drza" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80-JAVA/">编程语言-JAVA</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 10px;">Java</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-07-13-Heap%20and%20Priority%20Queue/">12_course/cs61b/2018-07-13-Heap and Priority Queue</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-list-01/">12_course/cs61b/2018-05-06-list-01</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-deque-ArrayDeque/">12_course/cs61b/2018-05-06-deque-ArrayDeque</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-Abstract%20Data%20Structure/">12_course/cs61b/2018-05-06-Abstract Data Structure</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61a/2017-03-22-SICP-lecture15%20Objects/">12_course/cs61a/2017-03-22-SICP-lecture15 Objects</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 lrouter<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

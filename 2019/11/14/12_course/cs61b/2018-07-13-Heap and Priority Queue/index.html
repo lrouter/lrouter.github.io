@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>12_course/cs61b/2018-07-13-Heap and Priority Queue | lrouter的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Heap and Priority QueuePriority Queue优先级队列，是指一种内部元素按照优先级存储的队列。 队列对外是一种顺序访问的结构，但是其内部可以采用多种数据结构来实现。 我们可以往优先级队列里面添加元素，读取或者删除元素，获取队列内当前的元素个数。 (Min) Priority Queue 是一种按照递增顺序排序的优先级队列。我们读取或者删除的元素。 它的特点是，我们当前">
+<meta name="keywords" content="云计算 linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="12_course&#x2F;cs61b&#x2F;2018-07-13-Heap and Priority Queue">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;14&#x2F;12_course&#x2F;cs61b&#x2F;2018-07-13-Heap%20and%20Priority%20Queue&#x2F;index.html">
+<meta property="og:site_name" content="lrouter的博客">
+<meta property="og:description" content="Heap and Priority QueuePriority Queue优先级队列，是指一种内部元素按照优先级存储的队列。 队列对外是一种顺序访问的结构，但是其内部可以采用多种数据结构来实现。 我们可以往优先级队列里面添加元素，读取或者删除元素，获取队列内当前的元素个数。 (Min) Priority Queue 是一种按照递增顺序排序的优先级队列。我们读取或者删除的元素。 它的特点是，我们当前">
+<meta property="og:locale" content="cn-zh">
+<meta property="og:updated_time" content="2018-07-13T03:04:46.865Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="lrouter的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">lrouter的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-12_course/cs61b/2018-07-13-Heap and Priority Queue" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/12_course/cs61b/2018-07-13-Heap%20and%20Priority%20Queue/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.607Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      12_course/cs61b/2018-07-13-Heap and Priority Queue
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Heap-and-Priority-Queue"><a href="#Heap-and-Priority-Queue" class="headerlink" title="Heap and Priority Queue"></a>Heap and Priority Queue</h1><h2 id="Priority-Queue"><a href="#Priority-Queue" class="headerlink" title="Priority Queue"></a>Priority Queue</h2><p>优先级队列，是指一种内部元素按照优先级存储的队列。</p>
+<p>队列对外是一种顺序访问的结构，但是其内部可以采用多种数据结构来实现。</p>
+<p>我们可以往优先级队列里面添加元素，读取或者删除元素，获取队列内当前的元素个数。</p>
+<p>(Min) Priority Queue 是一种按照递增顺序排序的优先级队列。我们读取或者删除的元素。</p>
+<p>它的特点是，我们当前从队列中读取或者删除的元素，永远是该队列中现有元素中最小的。</p>
+<p>(Min) Priority Queue 的定义如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/** (Min) Priority Queue: Allowing tracking and removal of the</span></span><br><span class="line"><span class="comment">  * smallest item in a priority queue. */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MinPQ</span>&lt;<span class="title">Item</span>&gt; </span>&#123;</span><br><span class="line">	<span class="comment">/** Adds the item to the priority queue. */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(Item x)</span></span>;</span><br><span class="line">	<span class="comment">/** Returns the smallest item in the priority queue. */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Item <span class="title">getSmallest</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="comment">/** Removes the smallest item from the priority queue. */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Item <span class="title">removeSmallest</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="comment">/** Returns the size of the priority queue. */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>它是一种接口，说明其内部的实现方式可以是多种。</p>
+<h2 id="应用场合"><a href="#应用场合" class="headerlink" title="应用场合"></a>应用场合</h2><p>想象一下，您是Grand Leader的信息合规性和幸福增强（GLICHE）团队的一员。<br>你的工作是监测市民们的聊天信息，以确保他们的会话是和谐的。<br>每天，你需要准备一份报告。报告当中是当天最不和谐的 M 条聊天信息。信息之间的先后顺序使用 HarmoniousnessComparator 来确定。</p>
+<p>最原始的实现方案：创建 1 个 list 用于存储当天所有的聊天记录。然后使用 HarmoniousnessComparator 对其进行排序，并最终返回前 M 条最大的信息。<br>假设当天所有的聊天记录是 N 条，那么就需要 N 个存储空间。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">unharmoniousTexts</span><span class="params">(Sniffer sniffer, <span class="keyword">int</span> M)</span> </span>&#123;</span><br><span class="line">    ArrayList&lt;String&gt; allMessages = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">    	<span class="keyword">for</span> (Timer timer = <span class="keyword">new</span> Timer(); timer.hours() &lt; <span class="number">24</span>; ) &#123;</span><br><span class="line">        	allMessages.add(sniffer.getNextMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Comparator&lt;String&gt; cmptr = <span class="keyword">new</span> HarmoniousnessComparator();</span><br><span class="line">	Collections.sort(allMessages, cmptr, Collections.reverseOrder());</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> allMessages.sublist(<span class="number">0</span>, M);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>改进的实现方案：只存储 M 条聊天记录。<br>可以看到，我们只需要 M 个存储空间。每次超过 M 条记录，就把其中最小的丢弃，这样存储的总是前 M 个最不和谐的聊天记录。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">unharmoniousTexts</span><span class="params">(Sniffer sniffer, <span class="keyword">int</span> M)</span> </span>&#123;</span><br><span class="line">    	Comparator&lt;String&gt; cmptr = <span class="keyword">new</span> HarmoniousnessComparator();</span><br><span class="line">    	MinPQ&lt;String&gt; unharmoniousTexts = <span class="keyword">new</span> HeapMinPQ&lt;Transaction&gt;(cmptr);</span><br><span class="line">    	<span class="keyword">for</span> (Timer timer = <span class="keyword">new</span> Timer(); timer.hours() &lt; <span class="number">24</span>; ) &#123;</span><br><span class="line">        	unharmoniousTexts.add(sniffer.getNextMessage());</span><br><span class="line">        <span class="keyword">if</span> (unharmoniousTexts.size() &gt; M) </span><br><span class="line">           &#123; unharmoniousTexts.removeSmallest(); &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ArrayList&lt;String&gt; textlist = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">    	<span class="keyword">while</span> (unharmoniousTexts.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            textlist.add(unharmoniousTexts.removeSmallest());</span><br><span class="line">    	&#125;</span><br><span class="line">    	<span class="keyword">return</span> textlist;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么我们如何来实现 MinPQ 呢？</p>
+<h2 id="MinPQ-的实现方法"><a href="#MinPQ-的实现方法" class="headerlink" title="MinPQ 的实现方法"></a>MinPQ 的实现方法</h2><p>我们可以使用多种方式来实现这种优先级队列。</p>
+<h2 id="Heap"><a href="#Heap" class="headerlink" title="Heap"></a>Heap</h2><p>使用改良的 Binary Tree 来实现:</p>
+<ul>
+<li>Tree is Complete. 除了树最底下一层的元素可以缺少外，其他层的元素都必须是full的。也就是 1 个 root 下面有 2 个 child。<br>底层的元素尽量往左排。</li>
+<li>每个 root 都比其所有的 child 小。</li>
+</ul>
+<h2 id="Heap-的实现"><a href="#Heap-的实现" class="headerlink" title="Heap 的实现"></a>Heap 的实现</h2><p>swim<br>sink</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/12_course/cs61b/2018-07-13-Heap%20and%20Priority%20Queue/" data-id="ck2yu6vtk001i2gtr7si349d2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/14/12_course/cs61b/2018-05-06-list-01/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">12_course/cs61b/2018-05-06-list-01</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80-JAVA/">编程语言-JAVA</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 10px;">Java</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-07-13-Heap%20and%20Priority%20Queue/">12_course/cs61b/2018-07-13-Heap and Priority Queue</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-list-01/">12_course/cs61b/2018-05-06-list-01</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-deque-ArrayDeque/">12_course/cs61b/2018-05-06-deque-ArrayDeque</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-Abstract%20Data%20Structure/">12_course/cs61b/2018-05-06-Abstract Data Structure</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61a/2017-03-22-SICP-lecture15%20Objects/">12_course/cs61a/2017-03-22-SICP-lecture15 Objects</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 lrouter<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

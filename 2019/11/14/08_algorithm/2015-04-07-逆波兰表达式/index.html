@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>08_algorithm/2015-04-07-逆波兰表达式 | lrouter的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="package test.algorithm.struct; import java.io.BufferedReader;import java.io.IOException;import java.io.InputStream;import java.io.InputStreamReader;import java.util.HashMap;import java.util.Iterator;i">
+<meta name="keywords" content="云计算 linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="08_algorithm&#x2F;2015-04-07-逆波兰表达式">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;14&#x2F;08_algorithm&#x2F;2015-04-07-%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F&#x2F;index.html">
+<meta property="og:site_name" content="lrouter的博客">
+<meta property="og:description" content="package test.algorithm.struct; import java.io.BufferedReader;import java.io.IOException;import java.io.InputStream;import java.io.InputStreamReader;import java.util.HashMap;import java.util.Iterator;i">
+<meta property="og:locale" content="cn-zh">
+<meta property="og:updated_time" content="2018-02-20T15:44:36.622Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="lrouter的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">lrouter的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-08_algorithm/2015-04-07-逆波兰表达式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/08_algorithm/2015-04-07-%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.561Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      08_algorithm/2015-04-07-逆波兰表达式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>package test.algorithm.struct;</p>
+<p>import java.io.BufferedReader;<br>import java.io.IOException;<br>import java.io.InputStream;<br>import java.io.InputStreamReader;<br>import java.util.HashMap;<br>import java.util.Iterator;<br>import java.util.LinkedList;<br>import java.util.Queue;<br>import java.util.Stack;</p>
+<p>import javax.swing.plaf.synth.SynthSpinnerUI;</p>
+<p>public class TestAlgorithmSuffixExpression {</p>
+<pre><code>private String operators = &quot;+-*/()&quot;;
+private HashMap&lt;String, Integer&gt; priorityMap = new HashMap&lt;String, Integer&gt;();
+private Queue&lt;Object&gt; outQueue = new LinkedList&lt;&gt;();
+
+public TestAlgorithmSuffixExpression() {
+    //初始化优先级Map
+    priorityMap.put(&quot;+&quot;, 1);
+    priorityMap.put(&quot;-&quot;, 1);
+    priorityMap.put(&quot;*&quot;, 2);
+    priorityMap.put(&quot;/&quot;, 2);
+    priorityMap.put(&quot;(&quot;, 0);
+    priorityMap.put(&quot;)&quot;, 0);
+
+
+}
+
+//如果op2的优先级低于op1的，那么就返回true
+public boolean isLowerOperatorsPriority(String op1, String op2) {
+    int priority1 = priorityMap.get(op1);
+    int priority2 = priorityMap.get(op2);
+    if(priority1 &gt; priority2)
+        return true;
+    else 
+        return false;
+}
+
+public boolean isOperator(String c) {
+    String operators = &quot;+-*/()&quot;;
+
+    if(operators.indexOf(c) == -1)
+        return false;
+    else
+        return true;
+}
+
+public void outItem(Object item){
+    System.out.println(&quot;item = &quot; + item);
+    outQueue.add(item);
+}
+
+public void findLeftBracket(Stack&lt;String&gt; operatorStack) {
+    while(!operatorStack.empty()) {
+        String op = operatorStack.pop();
+        if(op.equals(&quot;(&quot;))
+            break;
+        else
+            outItem(op);
+    }
+}
+
+public void findLowPriorityOperator(Stack&lt;String&gt; operatorStack, String op1) {
+    int index = 0;
+    while(!operatorStack.empty()) {
+        String op2 = operatorStack.get(index++);
+        if(isLowerOperatorsPriority(op1, op2)) {
+            operatorStack.push(op1);
+            return;
+        }else
+            outItem(operatorStack.pop());
+    }
+
+    operatorStack.push(op1);
+}
+
+public void popStack(Stack&lt;String&gt; operatorStack) {
+    while(!operatorStack.empty()) {
+        outItem(operatorStack.pop());
+    }
+}
+
+public void translate(String input) {
+    if(null == input || input.length() == 0)
+        return ;
+
+    //step 1. 如果是数字，直接输出
+    //step 2. 如果是运算符，
+        //2.1 如果是左括号，压入栈中；
+        //2.2 如果是右括号，将栈顶的元素弹出并输出，直到栈顶是1个左括号。将左括号弹出但不输出。
+        //2.3 如果是其他运算符，将栈顶的元素优先级和其相等或者比它高的，弹出并且输出。将当前运算符压入栈中。
+    //step 3. 如果遍历字符串完成，则将栈中的内容全部弹出并输出。
+    Stack&lt;String&gt; operatorStack = new Stack&lt;String&gt;();
+    outQueue.clear();
+    String digitString = &quot;&quot;;
+    for(int i = 0; i &lt; input.length(); i++) {
+
+        //解析出一个运算符.
+        char curChar = input.charAt(i);
+        String c = String.valueOf(curChar);
+        System.out.println(&quot;[&quot;+i+&quot;]&quot; + &quot; c = &quot; + c);
+        if(isOperator(c)) {
+            if(c.equals(&quot;(&quot;))
+                operatorStack.push(c);
+            else if(c.equals(&quot;)&quot;)) {
+                //输出前1个数字
+                System.out.println(&quot;digitString = &quot; + digitString);
+                outItem(Integer.parseInt(digitString));
+                digitString = &quot;&quot;;
+                findLeftBracket(operatorStack);
+            } else {
+                //输出前1个数字
+                System.out.println(&quot;digitString = &quot; + digitString);
+                outItem(Integer.parseInt(digitString));
+                digitString = &quot;&quot;;
+                findLowPriorityOperator(operatorStack, c);
+            }
+        } else {
+            digitString += c;
+        }
+
+        System.out.println(&quot;stack = &quot; + operatorStack);
+    }
+    //输出前1个数字
+    outItem(Integer.parseInt(digitString));
+
+    popStack(operatorStack);
+
+    return ;
+}
+
+public String translateQueueToString(){
+    String out = &quot;&quot;;
+    while(!outQueue.isEmpty())
+        out += outQueue.poll();
+    return out;
+}
+
+public static void main(String[] args) {
+    BufferedReader br = new BufferedReader(new 
+            InputStreamReader(System.in));
+
+    TestAlgorithmSuffixExpression test = new TestAlgorithmSuffixExpression();
+
+    while(true) {
+        System.out.println(&quot;输入表达式, 按下 &apos;q&apos; 键退出。&quot;);
+        String exp = &quot;&quot;;
+
+        try {
+            exp = br.readLine();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            break;
+        }
+
+        System.out.println(&quot;您输入了：&quot;+exp);
+        if(exp.equalsIgnoreCase(&quot;quit&quot;))
+            break;
+        test.translate(exp);
+        String out = test.translateQueueToString();
+        System.out.println(&quot;结果是： &quot; + out);
+    } 
+}</code></pre><p>}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/08_algorithm/2015-04-07-%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/" data-id="ck2yu6vt500152gtr70v933mj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/14/09_%E5%B5%8C%E5%85%A5%E5%BC%8F/2016-03-03-%E5%85%8B%E9%9A%86Neo%E6%9D%BF%E5%AD%90%E7%9A%84Ext4%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          09_嵌入式/2016-03-03-克隆Neo板子的Ext4文件系统
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/14/08_algorithm/2012-10-26-%E7%AE%97%E6%B3%95-%E4%BD%BF%E7%94%A8%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AE%9E%E7%8E%B0%E8%AE%A1%E7%AE%97%E5%99%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">08_algorithm/2012-10-26-算法-使用逆波兰表达式实现计算器</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80-JAVA/">编程语言-JAVA</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 10px;">Java</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-07-13-Heap%20and%20Priority%20Queue/">12_course/cs61b/2018-07-13-Heap and Priority Queue</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-list-01/">12_course/cs61b/2018-05-06-list-01</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-deque-ArrayDeque/">12_course/cs61b/2018-05-06-deque-ArrayDeque</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-Abstract%20Data%20Structure/">12_course/cs61b/2018-05-06-Abstract Data Structure</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61a/2017-03-22-SICP-lecture15%20Objects/">12_course/cs61a/2017-03-22-SICP-lecture15 Objects</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 lrouter<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

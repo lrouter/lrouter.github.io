@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>lrouter的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="简单往往并不简单">
+<meta name="keywords" content="云计算 linux">
+<meta property="og:type" content="website">
+<meta property="og:title" content="lrouter的博客">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;page&#x2F;2&#x2F;index.html">
+<meta property="og:site_name" content="lrouter的博客">
+<meta property="og:description" content="简单往往并不简单">
+<meta property="og:locale" content="cn-zh">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="lrouter的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">lrouter的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-09_嵌入式/2016-03-03-克隆Neo板子的Ext4文件系统" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/09_%E5%B5%8C%E5%85%A5%E5%BC%8F/2016-03-03-%E5%85%8B%E9%9A%86Neo%E6%9D%BF%E5%AD%90%E7%9A%84Ext4%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.566Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/14/09_%E5%B5%8C%E5%85%A5%E5%BC%8F/2016-03-03-%E5%85%8B%E9%9A%86Neo%E6%9D%BF%E5%AD%90%E7%9A%84Ext4%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">09_嵌入式/2016-03-03-克隆Neo板子的Ext4文件系统</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="板子的分区"><a href="#板子的分区" class="headerlink" title="板子的分区"></a>板子的分区</h2><p>现有板子上有两个分区，</p>
+<h2 id="删除-etc-fs-resized文件"><a href="#删除-etc-fs-resized文件" class="headerlink" title="删除/etc/fs.resized文件"></a>删除/etc/fs.resized文件</h2><p>文件系统自动扩展分区。不然剩下的空间不会被文件系统占满。</p>
+<h2 id="禁止pi用户自动登录"><a href="#禁止pi用户自动登录" class="headerlink" title="禁止pi用户自动登录"></a>禁止pi用户自动登录</h2><p>修改/etc/systemd/system/serial-getty@ttyS0.service.d/autologin.conf文件，注释掉最后两行，禁止pi用户通过串口自动登录</p>
+<h2 id="root用户登录"><a href="#root用户登录" class="headerlink" title="root用户登录"></a>root用户登录</h2><p>修改/etc/sudoers文件，添加pi ALL=(ALL:ALL) ALL，使得pi用户可以执行sudo，进而执行nmcli；</p>
+<p>root用户修改/usr/bin/sudo的权限：chmod u+s /usr/bin/sudo；使得pi用户可以执行sudo；</p>
+<p>root用户修改pi用户的密码：passwd pi；</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/09_%E5%B5%8C%E5%85%A5%E5%BC%8F/2016-03-03-%E5%85%8B%E9%9A%86Neo%E6%9D%BF%E5%AD%90%E7%9A%84Ext4%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" data-id="ck2yu6vt700172gtr7dyx7yi0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-08_algorithm/2015-04-07-逆波兰表达式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/08_algorithm/2015-04-07-%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.561Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/14/08_algorithm/2015-04-07-%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/">08_algorithm/2015-04-07-逆波兰表达式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>package test.algorithm.struct;</p>
+<p>import java.io.BufferedReader;<br>import java.io.IOException;<br>import java.io.InputStream;<br>import java.io.InputStreamReader;<br>import java.util.HashMap;<br>import java.util.Iterator;<br>import java.util.LinkedList;<br>import java.util.Queue;<br>import java.util.Stack;</p>
+<p>import javax.swing.plaf.synth.SynthSpinnerUI;</p>
+<p>public class TestAlgorithmSuffixExpression {</p>
+<pre><code>private String operators = &quot;+-*/()&quot;;
+private HashMap&lt;String, Integer&gt; priorityMap = new HashMap&lt;String, Integer&gt;();
+private Queue&lt;Object&gt; outQueue = new LinkedList&lt;&gt;();
+
+public TestAlgorithmSuffixExpression() {
+    //初始化优先级Map
+    priorityMap.put(&quot;+&quot;, 1);
+    priorityMap.put(&quot;-&quot;, 1);
+    priorityMap.put(&quot;*&quot;, 2);
+    priorityMap.put(&quot;/&quot;, 2);
+    priorityMap.put(&quot;(&quot;, 0);
+    priorityMap.put(&quot;)&quot;, 0);
+
+
+}
+
+//如果op2的优先级低于op1的，那么就返回true
+public boolean isLowerOperatorsPriority(String op1, String op2) {
+    int priority1 = priorityMap.get(op1);
+    int priority2 = priorityMap.get(op2);
+    if(priority1 &gt; priority2)
+        return true;
+    else 
+        return false;
+}
+
+public boolean isOperator(String c) {
+    String operators = &quot;+-*/()&quot;;
+
+    if(operators.indexOf(c) == -1)
+        return false;
+    else
+        return true;
+}
+
+public void outItem(Object item){
+    System.out.println(&quot;item = &quot; + item);
+    outQueue.add(item);
+}
+
+public void findLeftBracket(Stack&lt;String&gt; operatorStack) {
+    while(!operatorStack.empty()) {
+        String op = operatorStack.pop();
+        if(op.equals(&quot;(&quot;))
+            break;
+        else
+            outItem(op);
+    }
+}
+
+public void findLowPriorityOperator(Stack&lt;String&gt; operatorStack, String op1) {
+    int index = 0;
+    while(!operatorStack.empty()) {
+        String op2 = operatorStack.get(index++);
+        if(isLowerOperatorsPriority(op1, op2)) {
+            operatorStack.push(op1);
+            return;
+        }else
+            outItem(operatorStack.pop());
+    }
+
+    operatorStack.push(op1);
+}
+
+public void popStack(Stack&lt;String&gt; operatorStack) {
+    while(!operatorStack.empty()) {
+        outItem(operatorStack.pop());
+    }
+}
+
+public void translate(String input) {
+    if(null == input || input.length() == 0)
+        return ;
+
+    //step 1. 如果是数字，直接输出
+    //step 2. 如果是运算符，
+        //2.1 如果是左括号，压入栈中；
+        //2.2 如果是右括号，将栈顶的元素弹出并输出，直到栈顶是1个左括号。将左括号弹出但不输出。
+        //2.3 如果是其他运算符，将栈顶的元素优先级和其相等或者比它高的，弹出并且输出。将当前运算符压入栈中。
+    //step 3. 如果遍历字符串完成，则将栈中的内容全部弹出并输出。
+    Stack&lt;String&gt; operatorStack = new Stack&lt;String&gt;();
+    outQueue.clear();
+    String digitString = &quot;&quot;;
+    for(int i = 0; i &lt; input.length(); i++) {
+
+        //解析出一个运算符.
+        char curChar = input.charAt(i);
+        String c = String.valueOf(curChar);
+        System.out.println(&quot;[&quot;+i+&quot;]&quot; + &quot; c = &quot; + c);
+        if(isOperator(c)) {
+            if(c.equals(&quot;(&quot;))
+                operatorStack.push(c);
+            else if(c.equals(&quot;)&quot;)) {
+                //输出前1个数字
+                System.out.println(&quot;digitString = &quot; + digitString);
+                outItem(Integer.parseInt(digitString));
+                digitString = &quot;&quot;;
+                findLeftBracket(operatorStack);
+            } else {
+                //输出前1个数字
+                System.out.println(&quot;digitString = &quot; + digitString);
+                outItem(Integer.parseInt(digitString));
+                digitString = &quot;&quot;;
+                findLowPriorityOperator(operatorStack, c);
+            }
+        } else {
+            digitString += c;
+        }
+
+        System.out.println(&quot;stack = &quot; + operatorStack);
+    }
+    //输出前1个数字
+    outItem(Integer.parseInt(digitString));
+
+    popStack(operatorStack);
+
+    return ;
+}
+
+public String translateQueueToString(){
+    String out = &quot;&quot;;
+    while(!outQueue.isEmpty())
+        out += outQueue.poll();
+    return out;
+}
+
+public static void main(String[] args) {
+    BufferedReader br = new BufferedReader(new 
+            InputStreamReader(System.in));
+
+    TestAlgorithmSuffixExpression test = new TestAlgorithmSuffixExpression();
+
+    while(true) {
+        System.out.println(&quot;输入表达式, 按下 &apos;q&apos; 键退出。&quot;);
+        String exp = &quot;&quot;;
+
+        try {
+            exp = br.readLine();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            break;
+        }
+
+        System.out.println(&quot;您输入了：&quot;+exp);
+        if(exp.equalsIgnoreCase(&quot;quit&quot;))
+            break;
+        test.translate(exp);
+        String out = test.translateQueueToString();
+        System.out.println(&quot;结果是： &quot; + out);
+    } 
+}</code></pre><p>}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/08_algorithm/2015-04-07-%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/" data-id="ck2yu6vt500152gtr70v933mj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-08_algorithm/2012-10-26-算法-使用逆波兰表达式实现计算器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/08_algorithm/2012-10-26-%E7%AE%97%E6%B3%95-%E4%BD%BF%E7%94%A8%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AE%9E%E7%8E%B0%E8%AE%A1%E7%AE%97%E5%99%A8/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.558Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/14/08_algorithm/2012-10-26-%E7%AE%97%E6%B3%95-%E4%BD%BF%E7%94%A8%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AE%9E%E7%8E%B0%E8%AE%A1%E7%AE%97%E5%99%A8/">08_algorithm/2012-10-26-算法-使用逆波兰表达式实现计算器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="中缀表达式"><a href="#中缀表达式" class="headerlink" title="中缀表达式"></a>中缀表达式</h2><h2 id="后缀表达式-逆波兰表达式"><a href="#后缀表达式-逆波兰表达式" class="headerlink" title="后缀表达式-逆波兰表达式"></a>后缀表达式-逆波兰表达式</h2><h2 id="中缀表达式转换为后缀表达式"><a href="#中缀表达式转换为后缀表达式" class="headerlink" title="中缀表达式转换为后缀表达式"></a>中缀表达式转换为后缀表达式</h2><h3 id="2个栈"><a href="#2个栈" class="headerlink" title="2个栈"></a>2个栈</h3><p>栈s1用于临时存储运算符，此运算符在栈内遵循越往栈顶优先级越高的原则；栈s1需先放入一个优先级最低的运算符，在这里假定为’#’；</p>
+<p>栈s2用于输入逆波兰式，为方便起见；</p>
+<p>从中缀式的左端开始逐个读取字符x。</p>
+<h3 id="1-若x是操作数，"><a href="#1-若x是操作数，" class="headerlink" title="1. 若x是操作数，"></a>1. 若x是操作数，</h3><p>则分析出完整的运算数（在这里为方便，用字母代替数字），将x直接压入栈s2；</p>
+<h3 id="2-若x是运算符，则分情况讨论："><a href="#2-若x是运算符，则分情况讨论：" class="headerlink" title="2. 若x是运算符，则分情况讨论："></a>2. 若x是运算符，则分情况讨论：</h3><ol>
+<li><p>若x是’(‘</p>
+<p>则直接压入栈s1；</p>
+</li>
+<li><p>若x是’)’</p>
+<p>则将栈s1栈顶的运算符，逐个出栈，依次压入栈s2，直到遇到’(‘并将其抛弃；</p>
+</li>
+<li><p>若x是除’(‘和’)’外的运算符，若当前栈s1的栈顶元素为’(‘</p>
+<p>则将x直接压入栈s1；</p>
+</li>
+<li><p>若x是除’(‘和’)’外的运算符，若当前栈s1的栈顶元素不为’(‘</p>
+<p>则将x与栈s1的栈顶元素比较，若x的优先级大于栈s1栈顶运算符优先级，则将x直接压入栈s1。否者，将栈s1的栈顶运算符弹出，压入栈s2中，直到栈s1的栈顶运算符优先级别低于（不包括等于）x的优先级。</p>
+<p>或栈s1的栈顶运算符为’(‘，此时再则将x压入栈s1;</p>
+</li>
+</ol>
+<h3 id="3-在进行完-2-后"><a href="#3-在进行完-2-后" class="headerlink" title="3. 在进行完(2)后"></a>3. 在进行完(2)后</h3><p>检查栈s1是否为空..若不为空，则将栈中元素依次弹出并压入栈s2中（不包括’#’）；</p>
+<h3 id="4-完成上述步骤后，栈s2便为逆波兰式输出结果。"><a href="#4-完成上述步骤后，栈s2便为逆波兰式输出结果。" class="headerlink" title="4. 完成上述步骤后，栈s2便为逆波兰式输出结果。"></a>4. 完成上述步骤后，栈s2便为逆波兰式输出结果。</h3><p>但是栈s2应做一下逆序处理，因为此时表达式的首字符位于栈底；</p>
+<p><a href="http://www.wangnunu.com/2016/04/05/java%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BD%9C%E4%B8%9A%E4%B9%8B%E4%B8%AD%E7%BC%80%E8%AE%A1%E7%AE%97%E5%BC%8F%EF%BC%88%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%89/" target="_blank" rel="noopener">http://www.wangnunu.com/2016/04/05/java%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BD%9C%E4%B8%9A%E4%B9%8B%E4%B8%AD%E7%BC%80%E8%AE%A1%E7%AE%97%E5%BC%8F%EF%BC%88%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%89/</a></p>
+<h2 id="计算后缀表达式的结果"><a href="#计算后缀表达式的结果" class="headerlink" title="计算后缀表达式的结果"></a>计算后缀表达式的结果</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/08_algorithm/2012-10-26-%E7%AE%97%E6%B3%95-%E4%BD%BF%E7%94%A8%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AE%9E%E7%8E%B0%E8%AE%A1%E7%AE%97%E5%99%A8/" data-id="ck2yu6vt600162gtr6zkj88mh" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-07_database/2015-09-08-oracle数据库常用命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/07_database/2015-09-08-oracle%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.554Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/14/07_database/2015-09-08-oracle%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">07_database/2015-09-08-oracle数据库常用命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><p>sqlplus system/password<br>conn username/password</p>
+<h2 id="查看所有用户"><a href="#查看所有用户" class="headerlink" title="查看所有用户"></a>查看所有用户</h2><p>select * from all_users; </p>
+<h2 id="查看所有用户的表名："><a href="#查看所有用户的表名：" class="headerlink" title="查看所有用户的表名："></a>查看所有用户的表名：</h2><p>select table_name from all_tables;</p>
+<h2 id="查看用户下所有的表"><a href="#查看用户下所有的表" class="headerlink" title="查看用户下所有的表"></a>查看用户下所有的表</h2><p>select * from user_tables;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/07_database/2015-09-08-oracle%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-id="ck2yu6vt400132gtrf325e3aq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-06_toolchain/2015-01-01_简述静态库链接原理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/06_toolchain/2015-01-01_%E7%AE%80%E8%BF%B0%E9%9D%99%E6%80%81%E5%BA%93%E9%93%BE%E6%8E%A5%E5%8E%9F%E7%90%86/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.549Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/14/06_toolchain/2015-01-01_%E7%AE%80%E8%BF%B0%E9%9D%99%E6%80%81%E5%BA%93%E9%93%BE%E6%8E%A5%E5%8E%9F%E7%90%86/">06_toolchain/2015-01-01_简述静态库链接原理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文主要讲述了基于目标文件（object文件）生成静态库，以及将静态库链接进可执行文件。</p>
+<p>object文件的后缀名为.o。</p>
+<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// lib/mylib.c</span><br><span class="line">int sum(int a, int b) &#123;</span><br><span class="line">    return a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// src/module.c</span><br><span class="line">int hello() &#123;</span><br><span class="line">  printf(&quot;helo. \r\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// src/main.c</span><br><span class="line">#include &quot;mylib.h&quot;</span><br><span class="line">#include &quot;module.h&quot;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    printf(&quot;main\n&quot;);</span><br><span class="line">    hello();</span><br><span class="line">    printf(&quot;sum: %d\n&quot;, sum(2, 3));</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="静态库的文件格式"><a href="#静态库的文件格式" class="headerlink" title="静态库的文件格式"></a>静态库的文件格式</h2><p>静态库和动态库不同，生成静态库的过程只是将一堆目标文件打包而已，不做符号重定位的处理。</p>
+<p>静态库没有标准，不同linux下都会有细微的差别，大致的格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Global header</span><br><span class="line">-----------------        +-------------------------------</span><br><span class="line">File header 1       ---&gt; | File name</span><br><span class="line">File content 1  |        | File modification timestamp </span><br><span class="line">-----------------        | Owner ID</span><br><span class="line">File header 2            | Group ID</span><br><span class="line">File content 2           | File mode</span><br><span class="line">-----------------        | File size in bytes</span><br><span class="line">...                      | File magic</span><br><span class="line">                         +-------------------------------</span><br></pre></td></tr></table></figure>
+
+<p>File header的很多字段时ASCII码，可以使用文本编辑器打开。</p>
+<p>可见，静态库就是使用ar命令，打包一堆.o文件，最后生成一个.a归档文件。</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#ar cvs libtest.a test1.o test2.o test3.o</span><br></pre></td></tr></table></figure>
+
+<h2 id="程序的链接过程"><a href="#程序的链接过程" class="headerlink" title="程序的链接过程"></a>程序的链接过程</h2><p>使用gcc编译工具链中的ld工具，链接静态库时，和链接一般的.o文件相似。链接过程如下图所示：</p>
+<p><img src="http://codemacro.com/assets/res/link-process.png" alt="链接过程" title="linker process"></p>
+<p>这幅图展示了基于目标文件，main.o和xml.o，以及静态库libmylib.a，链接生成可执行程序test的过程。</p>
+<p>链接使用的命令如下，我们做了修正，将-lmylib放在最后，这样符合一般的写法。原因我们后面会介绍。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -L../lib -o test main.o module.o -lmylib</span><br></pre></td></tr></table></figure>
+<ul>
+<li>-L选项指定了链接时搜索库文件的路径；</li>
+<li>-o选项指定了可执行文件的名字；</li>
+<li>-l选项，指定了需要链接哪些库。libmylib.a写为lmylib。如果为动态库，写法一样。</li>
+</ul>
+<p>链接的过程为：</p>
+<h3 id="建立两张table"><a href="#建立两张table" class="headerlink" title="建立两张table"></a>建立两张table</h3><p>表1 unresolved symbol table，和表2 global symbol table；引用的函数或者全局变量的符号放在表。定义的全局函数或者变量原型符号放在表2。</p>
+<h3 id="按顺序遍历目标文件和库文件"><a href="#按顺序遍历目标文件和库文件" class="headerlink" title="按顺序遍历目标文件和库文件"></a>按顺序遍历目标文件和库文件</h3><p><strong>搜索main.o</strong></p>
+<p>将main.c中定义的函数和全局变量放在表2中，将引用的其他文件的函数或者变量放在表1中，就是图中的sum函数。</p>
+<p><strong>搜索xml.o</strong></p>
+<p>如果xml.o中定义的符号，存在于表1中，那么将其从表1中删除。</p>
+<p>xml.o中定义的符号，加入到表2中。如果有重复定义，增加计数。</p>
+<p>xml.o中引用的函数或者全局变量符号，加入到表1中。</p>
+<p><strong>搜索libmylib.a</strong></p>
+<p>在-L选项指定的路径下搜索libmylib.a文件。如果找不到该文件，则在gcc的环境变量LIBRARY_PATH指定的路径中搜索。如果还找不到，则继续去系统的内定目录内/lib，/usr/lib，/usr/local/lib（64位系统时，改为lib64）。这是当初gcc内定的。</p>
+<p>找不到libmylib.a文件就报错。</p>
+<p>找到了libmylib.a文件之后，就解包这个.a文件，并遍历其中的.o文件。</p>
+<p>过程和上面的main.o和xml.o类似。如果静态库中的.o文件，不包含程序引用的符号，那么该.o文件就会被bypass。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>如果表1 unresolved symbol table非空，报错：符号未定义。<br>如果表2 global symbol table中存在重复定义的符号，报错：重复定义的符号。</p>
+<p>没有错误，那么合并对应的代码段和数据段，生成1个可执行文件。</p>
+<h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><h3 id="链接顺序"><a href="#链接顺序" class="headerlink" title="链接顺序"></a>链接顺序</h3><p>gcc在链接时，是按照命令行给出的顺序来搜索对应符号的。</p>
+<p>例如上面的示例代码中，main.c调用了sum函数，hello函数是在mylib.c中定义的。如果我们链接时这样写:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -L../lib -o test -lmylib main.o module.o</span><br></pre></td></tr></table></figure>
+<p>那么就会报找不到hello函数的问题。</p>
+<p>怎么解决这个问题？调整库的链接顺序可以解决大部分问题，但当静态库之间存在环形依赖时，则无法通过调整顺序来解决。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-whole-archive</span><br></pre></td></tr></table></figure>
+<p>-whole-archive选项告诉链接器把静态库中的所有.o都进行链接，针对以上例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ g++ -o test -L. test.o -Wl,--whole-archive -lfn main.o -Wl,--no-whole-archive</span><br><span class="line">$ ./test</span><br><span class="line">Lib ctor</span><br><span class="line">Test ctor</span><br><span class="line">main</span><br><span class="line">sum: 5</span><br></pre></td></tr></table></figure>
+<p>连lib.o也被链接了进来。-Wl选项告诉gcc将其作为链接器参数传入；之所以在命令行结尾加上<code>--no-whole-archive</code>是为了告诉编译器不要链接gcc默认的库</p>
+<p>可以看出这个方法还是有点暴力了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">–start-group</span><br></pre></td></tr></table></figure>
+<p>格式为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--start-group archives --end-group</span><br></pre></td></tr></table></figure>
+<p>位于–start-group –end-group中的所有静态库将被反复搜索，而不是默认的只搜索一次，直到不再有新的unresolved symbol产生为止。也就是说，出现在这里的.o如果发现有unresolved symbol，则可能回到之前的静态库中继续搜索。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ g++ -o test -L. test.o -Wl,--start-group -lfn main.o -Wl,--end-group</span><br><span class="line">$ ./test</span><br><span class="line">Test ctor</span><br><span class="line">main</span><br><span class="line">sum: 5</span><br></pre></td></tr></table></figure>
+<h3 id="库的嵌套"><a href="#库的嵌套" class="headerlink" title="库的嵌套"></a>库的嵌套</h3><p>由于ar创建静态库时本质上只是对文件进行打包，所以甚至可以创建一个嵌套的静态库，从而测试链接器是否会递归处理静态库中的.o。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ar -r libmylib.a mylib.o</span><br><span class="line">$ ar -r liboutmylib.a libmylib.a lib.o</span><br><span class="line">$ gcc -o test -L../lib test.o main.o -liboutmylib</span><br><span class="line">main.o: In function `main&apos;:</span><br><span class="line">main.cpp:(.text+0x19): undefined reference to `sum(int, int)&apos;</span><br><span class="line">collect2: ld returned 1 exit status</span><br></pre></td></tr></table></figure>
+
+<p>可见gcc链接器并不会递归处理静态库中的文件。</p>
+<p>之所以要提到嵌套静态库这个问题，是因为我发现很多时候我们喜欢为一个静态库工程链接其他静态库。</p>
+<p>当然，这里的链接并非真正的链接（仅是打包），这个过程当然可以聪明到将其他静态库里的.o提取出来然后打包到新的静态库。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/06_toolchain/2015-01-01_%E7%AE%80%E8%BF%B0%E9%9D%99%E6%80%81%E5%BA%93%E9%93%BE%E6%8E%A5%E5%8E%9F%E7%90%86/" data-id="ck2yu6vt200102gtresmg2fza" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-06_toolchain/2015-01-01_简述gcc编译链接过程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/06_toolchain/2015-01-01_%E7%AE%80%E8%BF%B0gcc%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5%E8%BF%87%E7%A8%8B/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.547Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/14/06_toolchain/2015-01-01_%E7%AE%80%E8%BF%B0gcc%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5%E8%BF%87%E7%A8%8B/">06_toolchain/2015-01-01_简述gcc编译链接过程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="gcc编译链接过程"><a href="#gcc编译链接过程" class="headerlink" title="gcc编译链接过程"></a>gcc编译链接过程</h2><p>在linux上，将c源码文件转化为可以执行的可执行文件，需要借助于gcc编译工具链。</p>
+<p>使用gcc编译工具链，经过以下过程，就可以将c源码文件转化为可执行文件：</p>
+<ul>
+<li>预处理。生成的文件后缀为.i。</li>
+<li>汇编。生成的文件后缀为.s。</li>
+<li>编译。生成的文件后缀为.o。</li>
+<li>链接。生成可执行文件。</li>
+</ul>
+<p>一般情况下，c源码不需要再人为的经过汇编处理成汇编代码文件，汇编代码文件后缀为.s。<br>开发人员在编译c源码时，编译器内部会做汇编和编译，生成object文件，文件后缀为.o。</p>
+<p>汇编代码文件，直接编译即可，会生成object文件。</p>
+<h2 id="示例代码-1"><a href="#示例代码-1" class="headerlink" title="示例代码 1"></a>示例代码 1</h2><p>代码目录：<br>test -<br>     include    -    头文件目录<br>     lib        -    库文件存放目录<br>     src        -    源码目录</p>
+<p><strong>include/add.h</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#ifndef __ADD_H_</span><br><span class="line">#define __ADD_H_</span><br><span class="line"></span><br><span class="line">int add(int a, int b);</span><br><span class="line"></span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+
+<p><strong>lib/add.c</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">int add(int a, int b)</span><br><span class="line">&#123;</span><br><span class="line">        int c = 0;</span><br><span class="line">        return c = a+b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>src/main.c</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;add.h&quot;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main(int argc, char **agrv)</span><br><span class="line">&#123;</span><br><span class="line">        int c = 0;</span><br><span class="line">        int a = 2, b = 1;</span><br><span class="line"></span><br><span class="line">        c = add(a,b);</span><br><span class="line"></span><br><span class="line">        printf(&quot;c = %d&quot;, c);</span><br><span class="line"></span><br><span class="line">        return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>main函数调用了add函数。</p>
+<h2 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h2><p>这一步，编译工具链中的预处理器，会对头文件、源码文件做一些预处理。</p>
+<p>这些预处理，包括：</p>
+<ul>
+<li>展开头文件中的一些宏定义。</li>
+<li>用头文件的内容，替换源码文件中的include 头文件这句代码。</li>
+<li>将源码中的宏定义，替换成对对应的内容。</li>
+</ul>
+<p>编译使用的命令是gcc，选项是-E。可以使用-o选项，指定生成的object文件的名字。</p>
+<p><strong>lib/add.i</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">controller-10-186-36-242:~/Documents/test/lib # gcc -I../include -E add.c -o add.i</span><br><span class="line">controller-10-186-36-242:~/Documents/test/lib # ls -al</span><br><span class="line">total 36</span><br><span class="line">drwxr-xr-x 2 root root  4096 Feb  5 02:11 .</span><br><span class="line">drwxr-xr-x 5 root root  4096 Feb  3 10:34 ..</span><br><span class="line">-rw-r--r-- 1 root root   100 Feb  5 02:10 add.c</span><br><span class="line">-rw-r--r-- 1 root root 16577 Feb  5 02:16 add.i</span><br></pre></td></tr></table></figure>
+
+<p><strong>src/main.i</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">controller-10-186-36-242:~/Documents/test/src # gcc -I../include -E main.c -o main.i</span><br><span class="line">controller-10-186-36-242:~/Documents/test/src # ls -al</span><br><span class="line">total 32</span><br><span class="line">drwxr-xr-x 2 root root  4096 Feb  5 02:18 .</span><br><span class="line">drwxr-xr-x 5 root root  4096 Feb  3 10:34 ..</span><br><span class="line">-rw-r--r-- 1 root root   156 Feb  3 09:23 main.c</span><br><span class="line">-rw-r--r-- 1 root root 16638 Feb  5 02:18 main.i</span><br></pre></td></tr></table></figure>
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>这一步，将预处理后的文件，编译成目标文件，也就是object文件。</p>
+<p>object文件里面，有我们以前学到的代码段，数据段。</p>
+<p>这个文件还不是可执行文件。</p>
+<p>可执行文件是由多个object文件，以及库文件合并而成的。合并的过程中会有各个段的合并，以及重定位处理。</p>
+<p>编译使用的命令是gcc，选项是-c。可以使用-o选项，指定生成的object文件的名字。</p>
+<p><strong>lib/add.o</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">controller-10-186-36-242:~/Documents/test/lib # gcc -I../include -c add.i</span><br><span class="line">controller-10-186-36-242:~/Documents/test/lib # ls -al</span><br><span class="line">total 36</span><br><span class="line">drwxr-xr-x 2 root root  4096 Feb  5 02:21 .</span><br><span class="line">drwxr-xr-x 5 root root  4096 Feb  3 10:34 ..</span><br><span class="line">-rw-r--r-- 1 root root   100 Feb  5 02:10 add.c</span><br><span class="line">-rw-r--r-- 1 root root 16577 Feb  5 02:16 add.i</span><br><span class="line">-rw-r--r-- 1 root root  1376 Feb  5 02:21 add.o</span><br></pre></td></tr></table></figure>
+
+<p><strong>src/main.o</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">controller-10-186-36-242:~/Documents/test/src # gcc -I../include -c main.i</span><br><span class="line">controller-10-186-36-242:~/Documents/test/src # ls -al</span><br><span class="line">total 36</span><br><span class="line">drwxr-xr-x 2 root root  4096 Feb  5 02:56 .</span><br><span class="line">drwxr-xr-x 5 root root  4096 Feb  3 10:34 ..</span><br><span class="line">-rw-r--r-- 1 root root   156 Feb  3 09:23 main.c</span><br><span class="line">-rw-r--r-- 1 root root 16638 Feb  5 02:18 main.i</span><br><span class="line">-rw-r--r-- 1 root root  1720 Feb  5 02:56 main.o</span><br></pre></td></tr></table></figure>
+
+<h2 id="生成静态库"><a href="#生成静态库" class="headerlink" title="生成静态库"></a>生成静态库</h2><p>我们基于add.o生成libadd.a的静态库文件，供后续链接使用。</p>
+<p>所谓静态库，就是将几个object文件打包生成的文件。详细的内容请参考我的另一篇文章，简述静态库链接原理。</p>
+<p>生成静态库，要使用到打包命令ar。静态库文件后缀名为.a。</p>
+<p><strong>lib/add.a</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">controller-10-186-36-242:~/Documents/test/lib # ar crv libadd.a add.o</span><br><span class="line">a - add.o</span><br><span class="line">controller-10-186-36-242:~/Documents/test/lib # ls -al</span><br><span class="line">total 40</span><br><span class="line">drwxr-xr-x 2 root root  4096 Feb  5 03:07 .</span><br><span class="line">drwxr-xr-x 5 root root  4096 Feb  3 10:34 ..</span><br><span class="line">-rw-r--r-- 1 root root   100 Feb  5 02:10 add.c</span><br><span class="line">-rw-r--r-- 1 root root 16577 Feb  5 02:16 add.i</span><br><span class="line">-rw-r--r-- 1 root root  1376 Feb  5 02:21 add.o</span><br><span class="line">-rw-r--r-- 1 root root  1516 Feb  5 03:07 libadd.a</span><br></pre></td></tr></table></figure>
+
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p>链接，就是将object文件和库文件合并在一起，生成可执行文件的过程。</p>
+<p>合并的过程中，会处理函数的引用，段的合并，加入可执行程序的初始化加载代码等工作。</p>
+<p>链接使用gcc编译链中的ld工具，或者直接使用gcc也可以，但是gcc其实是调用了ld。可以使用-o选项，指定生成的object文件的名字。</p>
+<p>-L选项，指定链接时库的搜索路径。</p>
+<p>-l选项，指定库的名字。例如libadd.a，写为-ladd。</p>
+<p><strong>src/main</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">controller-10-186-36-242:~/Documents/test/src # gcc -o main main.o -L../lib -ladd</span><br><span class="line">controller-10-186-36-242:~/Documents/test/src # ls -al</span><br><span class="line">total 48</span><br><span class="line">drwxr-xr-x 2 root root  4096 Feb  5 03:19 .</span><br><span class="line">drwxr-xr-x 5 root root  4096 Feb  3 10:34 ..</span><br><span class="line">-rwxr-xr-x 1 root root 11956 Feb  5 03:19 main</span><br><span class="line">-rw-r--r-- 1 root root   156 Feb  3 09:23 main.c</span><br><span class="line">-rw-r--r-- 1 root root 16638 Feb  5 02:18 main.i</span><br><span class="line">-rw-r--r-- 1 root root  1720 Feb  5 02:56 main.o</span><br></pre></td></tr></table></figure>
+
+<h2 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h2><p>最后执行可执行文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">controller-10-186-36-242:~/Documents/test/src # ./main</span><br><span class="line">c = 3</span><br><span class="line">controller-10-186-36-242:~/Documents/test/src #</span><br></pre></td></tr></table></figure>
+
+<h2 id="改进1"><a href="#改进1" class="headerlink" title="改进1"></a>改进1</h2><p>我们可以将预处理，汇编，编译合在一起。用一条命令解决，gcc -c。</p>
+<p>例如，我们一次性生成add.o文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">controller-10-186-36-242:~/Documents/test/lib # gcc -I../include -c add.c -o add.o</span><br><span class="line">controller-10-186-36-242:~/Documents/test/lib # ls -al</span><br><span class="line">total 16</span><br><span class="line">drwxr-xr-x 2 root root 4096 Feb  5 03:32 .</span><br><span class="line">drwxr-xr-x 5 root root 4096 Feb  3 10:34 ..</span><br><span class="line">-rw-r--r-- 1 root root  100 Feb  5 02:10 add.c</span><br><span class="line">-rw-r--r-- 1 root root 1376 Feb  5 03:32 add.o</span><br></pre></td></tr></table></figure>
+
+<p>事实上，我们可以将预处理，汇编，编译，链接合在一起。用一条命令解决。</p>
+<p>例如在已经存在libadd.a的情况下，我们一次性编译链接生成可执行文件main。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">controller-10-186-36-242:~/Documents/test/src # gcc -I../include -o main main.c -L../lib -ladd</span><br><span class="line">controller-10-186-36-242:~/Documents/test/src #</span><br><span class="line">controller-10-186-36-242:~/Documents/test/src #</span><br><span class="line">controller-10-186-36-242:~/Documents/test/src # ls -al</span><br><span class="line">total 48</span><br><span class="line">drwxr-xr-x 2 root root  4096 Feb  5 03:35 .</span><br><span class="line">drwxr-xr-x 5 root root  4096 Feb  3 10:34 ..</span><br><span class="line">-rwxr-xr-x 1 root root 11956 Feb  5 03:35 main</span><br><span class="line">-rw-r--r-- 1 root root   161 Feb  5 03:23 main.c</span><br><span class="line">-rw-r--r-- 1 root root 16638 Feb  5 02:18 main.i</span><br><span class="line">-rw-r--r-- 1 root root  1720 Feb  5 03:23 main.o</span><br></pre></td></tr></table></figure>
+
+<p>要注意，我们不能直接在编译add.c时，将预处理，汇编，编译，链接合在一起。因为add.c只是个模块的文件，并不是主代码文件。</p>
+<p>如果我们合并在一起，会发生如下错误。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">controller-10-186-36-242:~/Documents/test/lib # gcc -I../include add.c -o add.o</span><br><span class="line">/usr/lib64/gcc/x86_64-suse-linux/4.3/../../../../lib64/crt1.o: In function `_start&apos;:</span><br><span class="line">/usr/src/packages/BUILD/glibc-2.11.3/csu/../sysdeps/x86_64/elf/start.S:109: undefined reference to `main&apos;</span><br><span class="line">collect2: ld returned 1 exit status</span><br></pre></td></tr></table></figure>
+
+<p>因为链接的过程，最后生成的是一个可执行文件。而add.c里面没有main函数，所以报错了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/06_toolchain/2015-01-01_%E7%AE%80%E8%BF%B0gcc%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5%E8%BF%87%E7%A8%8B/" data-id="ck2yu6vt0000z2gtr5a8hbphs" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-06_toolchain/2013-08-09-gcc编译选项之gdb调试选项" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/06_toolchain/2013-08-09-gcc%E7%BC%96%E8%AF%91%E9%80%89%E9%A1%B9%E4%B9%8Bgdb%E8%B0%83%E8%AF%95%E9%80%89%E9%A1%B9/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.545Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/14/06_toolchain/2013-08-09-gcc%E7%BC%96%E8%AF%91%E9%80%89%E9%A1%B9%E4%B9%8Bgdb%E8%B0%83%E8%AF%95%E9%80%89%E9%A1%B9/">06_toolchain/2013-08-09-gcc编译选项之gdb调试选项</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="GNU-Make工具链"><a href="#GNU-Make工具链" class="headerlink" title="GNU Make工具链"></a>GNU Make工具链</h1><h2 id="编译时加入gdb调试选项"><a href="#编译时加入gdb调试选项" class="headerlink" title="编译时加入gdb调试选项"></a>编译时加入gdb调试选项</h2><p>加入-g选项，gcc生成的可执行文件里面，会包含符号表和gdb调试符号，方便gdb调试。但是生成的可执行文件比较大。</p>
+<p>gcc -g</p>
+<h2 id="生成的代码文件"><a href="#生成的代码文件" class="headerlink" title="生成的代码文件"></a>生成的代码文件</h2><p>使用arm32-linux-gnueabi-strip工具（arm平台的工具），可以去除-g选项加入的调试符号。</p>
+<p>文件大小，和没有-g选项时生成的大小是一致的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/06_toolchain/2013-08-09-gcc%E7%BC%96%E8%AF%91%E9%80%89%E9%A1%B9%E4%B9%8Bgdb%E8%B0%83%E8%AF%95%E9%80%89%E9%A1%B9/" data-id="ck2yu6vt200112gtre2ws639l" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-05_读书/2018-01-01-职业" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/05_%E8%AF%BB%E4%B9%A6/2018-01-01-%E8%81%8C%E4%B8%9A/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.540Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/14/05_%E8%AF%BB%E4%B9%A6/2018-01-01-%E8%81%8C%E4%B8%9A/">05_读书/2018-01-01-职业</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>腾讯高性能虚拟网络研发工程师<br>熟悉Linux操作系统下C开发，对程序性能敏感，有性能优化经验；<br>对常见网络协议有深刻理解，例如TCP/IP等；<br>熟悉Linux内核网络协议栈，对linux内核网络相关组件都有一定了解，例如bridge, ovs, iptables, netfilter等；<br>有高性能网络平台开发经验者优先，例如DPDK，VPP，NP，智能网卡等；<br>有公有云网络研发经验者优先；<br>对新技术敏感，对网络技术发展方向有自己的理解；<br>责任心强，做事靠谱。</p>
+<p>来自 <a href="https://www.lagou.com/jobs/4006525.html" target="_blank" rel="noopener">https://www.lagou.com/jobs/4006525.html</a> </p>
+<p>今日头条招聘<br>SDN网络高级研发工程师</p>
+<p>来自 <a href="https://www.lagou.com/jobs/3872318.html" target="_blank" rel="noopener">https://www.lagou.com/jobs/3872318.html</a> </p>
+<p>职位职责：<br>1、从事SDN相关软件开发(基于DPDK和OVS)及其性能优化。<br>2、参与SDN网络开发和落地。 </p>
+<p>职位要求：<br>1、对于计算机网络知识有深刻的理解。<br>2、熟悉ONOS、ODL等控制器，有过相关开发经验。<br>3、三年以上前后端软件开发经验，熟练掌握C/C++、Java等前后端编程语言。<br>4、熟悉或者了解二、三层路由交换原理，TCP/IP协议，有数通产品开发经验优先。<br>5、精通 SDN相关技术:Openflow协议，Openvswitch的原理和实现，DPDK技术原理。<br>6、具备良好的团队合作精神，自学能力，良好的沟通能力和文档编写能力，对软件开发有浓厚的兴趣。</p>
+<p>来自 <a href="https://www.lagou.com/jobs/3872318.html" target="_blank" rel="noopener">https://www.lagou.com/jobs/3872318.html</a> </p>
+<p>京东金融招聘<br>高性能网络研发工程师</p>
+<p>来自 <a href="https://www.lagou.com/jobs/3228340.html" target="_blank" rel="noopener">https://www.lagou.com/jobs/3228340.html</a> </p>
+<p>来自 <a href="https://www.lagou.com/jobs/3228340.html" target="_blank" rel="noopener">https://www.lagou.com/jobs/3228340.html</a> </p>
+<p>岗位描述：<br>1、负责金融云虚拟网络产品，南北向网关功能的架构设计和研发；<br>2、负责Docker网络架构优化；<br>3、负责四/七层网络产品的架构设计和开发，比如lvs、nginx等等。</p>
+<p>岗位要求：<br>1、5年以上工作经验，精通C语言，熟悉常用的数据结构和算法；<br>2、熟悉TCP/IP等常见网络协议；<br>3、深刻理解路由交换、NAT、负载均衡、overlay等网络技术；<br>4、深刻理解多核网络处理，熟悉多核转发平台，如DPDK或者Cavium、Tilera；<br>5、加分项：有Open vswitch开发经验，有Nginx/OpenSSL等开发经验；<br>6、加分项：熟悉IDC网络物理架构；<br>7、加分项：理解Docker网络的基本原理，并有实际的开发经验；<br>8、加分项：熟悉SDN、NFV等相关技术，并有DPDK实际开发经验。</p>
+<p>来自 <a href="https://www.lagou.com/jobs/3228340.html" target="_blank" rel="noopener">https://www.lagou.com/jobs/3228340.html</a> </p>
+<p>小米云平台<br>网络开发工程师 </p>
+<p>来自 <a href="https://www.lagou.com/jobs/3836498.html" target="_blank" rel="noopener">https://www.lagou.com/jobs/3836498.html</a> </p>
+<p>职位诱惑：<br>餐补,没有考勤,年终奖,股票期权<br>职位描述：<br>岗位职责:</p>
+<ol>
+<li>负责小米智能产品的媒体传输协议开发；</li>
+<li>根据小米AI产品布局进行前瞻性分布式协议研究，并跟踪业界最新技术进展；</li>
+</ol>
+<p>任职要求:</p>
+<ol>
+<li>大学本科及以上学历，具有3年以上Unix/Linux平台C/C++开发工作经验；</li>
+<li>熟悉网络通信机制、TCP/IP协议栈以及网络编程；</li>
+<li>熟悉NAT网络穿透、网络探测、丢包重传等媒体传输机制；</li>
+<li>熟悉UPnP,zookeeper等P2P分布式系统的设计和开发；</li>
+<li>具备VOIP传输协议开发经验者优先；</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/05_%E8%AF%BB%E4%B9%A6/2018-01-01-%E8%81%8C%E4%B8%9A/" data-id="ck2yu6vt300122gtrgjwjd90f" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-05_读书/2016-08-23-使用金字塔原理来表达" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/05_%E8%AF%BB%E4%B9%A6/2016-08-23-%E4%BD%BF%E7%94%A8%E9%87%91%E5%AD%97%E5%A1%94%E5%8E%9F%E7%90%86%E6%9D%A5%E8%A1%A8%E8%BE%BE/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.538Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/14/05_%E8%AF%BB%E4%B9%A6/2016-08-23-%E4%BD%BF%E7%94%A8%E9%87%91%E5%AD%97%E5%A1%94%E5%8E%9F%E7%90%86%E6%9D%A5%E8%A1%A8%E8%BE%BE/">05_读书/2016-08-23-使用金字塔原理来表达</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="START法则"><a href="#START法则" class="headerlink" title="START法则"></a>START法则</h2><p>结果，行动，背景。</p>
+<p>对不同的对象描述成功的事情，排序是。</p>
+<p>对老板，讲结果，行动，经验。</p>
+<p>对同事，讲行动，经验，教训。</p>
+<p>对客户，讲结果和背景。</p>
+<p>对面试考官，讲行动和经验。</p>
+<h2 id="如何讲负面的问题"><a href="#如何讲负面的问题" class="headerlink" title="如何讲负面的问题"></a>如何讲负面的问题</h2><p>分析和解决问题的思路是：</p>
+<p>问题是什么，原因是什么，解决方案是什么。</p>
+<p>但是描述问题，应该是这样的顺序：</p>
+<p>解决方案是什么，问题是什么，原因是什么。</p>
+<h2 id="开场四要素"><a href="#开场四要素" class="headerlink" title="开场四要素"></a>开场四要素</h2><p>背景，冲突，疑问，答案。</p>
+<h2 id="PPT"><a href="#PPT" class="headerlink" title="PPT"></a>PPT</h2><p>页面1,3,4,8</p>
+<p>第1页，PPT的目录。</p>
+<p>第3页，PPT的摘要。</p>
+<p>第4页，第一个结论，论据。</p>
+<p>第8页，第二个结论，论据。</p>
+<p>条图，显示反差和对比。</p>
+<p>饼图，显示占比，弱化反差对比。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/05_%E8%AF%BB%E4%B9%A6/2016-08-23-%E4%BD%BF%E7%94%A8%E9%87%91%E5%AD%97%E5%A1%94%E5%8E%9F%E7%90%86%E6%9D%A5%E8%A1%A8%E8%BE%BE/" data-id="ck2yu6vsz000x2gtr4ugchzq4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-05_读书/2015-09-11-斯坦福-逻辑学导论-02-命题逻辑" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/05_%E8%AF%BB%E4%B9%A6/2015-09-11-%E6%96%AF%E5%9D%A6%E7%A6%8F-%E9%80%BB%E8%BE%91%E5%AD%A6%E5%AF%BC%E8%AE%BA-02-%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.536Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/14/05_%E8%AF%BB%E4%B9%A6/2015-09-11-%E6%96%AF%E5%9D%A6%E7%A6%8F-%E9%80%BB%E8%BE%91%E5%AD%A6%E5%AF%BC%E8%AE%BA-02-%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91/">05_读书/2015-09-11-斯坦福-逻辑学导论-02-命题逻辑</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="符号"><a href="#符号" class="headerlink" title="符号"></a>符号</h2><p>Compound sentences are formed from simpler sentences and express relationships among the constituent sentences. There are five types of compound sentences, viz. negations, conjunctions, disjunctions, implications, and biconditionals.</p>
+<p>A negation consists of the negation operator ¬ and an arbitrary sentence, called the target. For example, given the sentence p, we can form the negation of p as shown below.</p>
+<p>(¬p)</p>
+<p>A conjunction is a sequence of sentences separated by occurrences of the ∧ operator and enclosed in parentheses, as shown below. The constituent sentences are called conjuncts. For example, we can form the conjunction of p and q as follows.</p>
+<p>(p ∧ q)</p>
+<p>A disjunction is a sequence of sentences separated by occurrences of the ∨ operator and enclosed in parentheses. The constituent sentences are called disjuncts. For example, we can form the disjunction of p and q as follows.</p>
+<p>(p ∨ q)</p>
+<p>An implication consists of a pair of sentences separated by the ⇒ operator and enclosed in parentheses. The sentence to the left of the operator is called the antecedent, and the sentence to the right is called the consequent. The implication of p and q is shown below.</p>
+<p>(p ⇒ q)</p>
+<p>A biconditional is a combination of an implication and a reverse implication. For example, we can express the biconditional of p and q as shown below.</p>
+<p>(p ⇔ q)</p>
+<h2 id="语义"><a href="#语义" class="headerlink" title="语义"></a>语义</h2><table>
+<thead>
+<tr>
+<th>φ</th>
+<th>¬φ</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/05_%E8%AF%BB%E4%B9%A6/2015-09-11-%E6%96%AF%E5%9D%A6%E7%A6%8F-%E9%80%BB%E8%BE%91%E5%AD%A6%E5%AF%BC%E8%AE%BA-02-%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91/" data-id="ck2yu6vsx000u2gtrh7e42z3v" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80-JAVA/">编程语言-JAVA</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 10px;">Java</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-07-13-Heap%20and%20Priority%20Queue/">12_course/cs61b/2018-07-13-Heap and Priority Queue</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-list-01/">12_course/cs61b/2018-05-06-list-01</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-deque-ArrayDeque/">12_course/cs61b/2018-05-06-deque-ArrayDeque</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-Abstract%20Data%20Structure/">12_course/cs61b/2018-05-06-Abstract Data Structure</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61a/2017-03-22-SICP-lecture15%20Objects/">12_course/cs61a/2017-03-22-SICP-lecture15 Objects</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 lrouter<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

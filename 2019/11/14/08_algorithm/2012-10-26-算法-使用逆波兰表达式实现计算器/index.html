@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>08_algorithm/2012-10-26-算法-使用逆波兰表达式实现计算器 | lrouter的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="中缀表达式后缀表达式-逆波兰表达式中缀表达式转换为后缀表达式2个栈栈s1用于临时存储运算符，此运算符在栈内遵循越往栈顶优先级越高的原则；栈s1需先放入一个优先级最低的运算符，在这里假定为’#’； 栈s2用于输入逆波兰式，为方便起见； 从中缀式的左端开始逐个读取字符x。 1. 若x是操作数，则分析出完整的运算数（在这里为方便，用字母代替数字），将x直接压入栈s2； 2. 若x是运算符，则分情况讨论：">
+<meta name="keywords" content="云计算 linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="08_algorithm&#x2F;2012-10-26-算法-使用逆波兰表达式实现计算器">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;14&#x2F;08_algorithm&#x2F;2012-10-26-%E7%AE%97%E6%B3%95-%E4%BD%BF%E7%94%A8%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AE%9E%E7%8E%B0%E8%AE%A1%E7%AE%97%E5%99%A8&#x2F;index.html">
+<meta property="og:site_name" content="lrouter的博客">
+<meta property="og:description" content="中缀表达式后缀表达式-逆波兰表达式中缀表达式转换为后缀表达式2个栈栈s1用于临时存储运算符，此运算符在栈内遵循越往栈顶优先级越高的原则；栈s1需先放入一个优先级最低的运算符，在这里假定为’#’； 栈s2用于输入逆波兰式，为方便起见； 从中缀式的左端开始逐个读取字符x。 1. 若x是操作数，则分析出完整的运算数（在这里为方便，用字母代替数字），将x直接压入栈s2； 2. 若x是运算符，则分情况讨论：">
+<meta property="og:locale" content="cn-zh">
+<meta property="og:updated_time" content="2018-02-20T15:44:36.357Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="lrouter的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">lrouter的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-08_algorithm/2012-10-26-算法-使用逆波兰表达式实现计算器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/08_algorithm/2012-10-26-%E7%AE%97%E6%B3%95-%E4%BD%BF%E7%94%A8%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AE%9E%E7%8E%B0%E8%AE%A1%E7%AE%97%E5%99%A8/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.558Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      08_algorithm/2012-10-26-算法-使用逆波兰表达式实现计算器
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="中缀表达式"><a href="#中缀表达式" class="headerlink" title="中缀表达式"></a>中缀表达式</h2><h2 id="后缀表达式-逆波兰表达式"><a href="#后缀表达式-逆波兰表达式" class="headerlink" title="后缀表达式-逆波兰表达式"></a>后缀表达式-逆波兰表达式</h2><h2 id="中缀表达式转换为后缀表达式"><a href="#中缀表达式转换为后缀表达式" class="headerlink" title="中缀表达式转换为后缀表达式"></a>中缀表达式转换为后缀表达式</h2><h3 id="2个栈"><a href="#2个栈" class="headerlink" title="2个栈"></a>2个栈</h3><p>栈s1用于临时存储运算符，此运算符在栈内遵循越往栈顶优先级越高的原则；栈s1需先放入一个优先级最低的运算符，在这里假定为’#’；</p>
+<p>栈s2用于输入逆波兰式，为方便起见；</p>
+<p>从中缀式的左端开始逐个读取字符x。</p>
+<h3 id="1-若x是操作数，"><a href="#1-若x是操作数，" class="headerlink" title="1. 若x是操作数，"></a>1. 若x是操作数，</h3><p>则分析出完整的运算数（在这里为方便，用字母代替数字），将x直接压入栈s2；</p>
+<h3 id="2-若x是运算符，则分情况讨论："><a href="#2-若x是运算符，则分情况讨论：" class="headerlink" title="2. 若x是运算符，则分情况讨论："></a>2. 若x是运算符，则分情况讨论：</h3><ol>
+<li><p>若x是’(‘</p>
+<p>则直接压入栈s1；</p>
+</li>
+<li><p>若x是’)’</p>
+<p>则将栈s1栈顶的运算符，逐个出栈，依次压入栈s2，直到遇到’(‘并将其抛弃；</p>
+</li>
+<li><p>若x是除’(‘和’)’外的运算符，若当前栈s1的栈顶元素为’(‘</p>
+<p>则将x直接压入栈s1；</p>
+</li>
+<li><p>若x是除’(‘和’)’外的运算符，若当前栈s1的栈顶元素不为’(‘</p>
+<p>则将x与栈s1的栈顶元素比较，若x的优先级大于栈s1栈顶运算符优先级，则将x直接压入栈s1。否者，将栈s1的栈顶运算符弹出，压入栈s2中，直到栈s1的栈顶运算符优先级别低于（不包括等于）x的优先级。</p>
+<p>或栈s1的栈顶运算符为’(‘，此时再则将x压入栈s1;</p>
+</li>
+</ol>
+<h3 id="3-在进行完-2-后"><a href="#3-在进行完-2-后" class="headerlink" title="3. 在进行完(2)后"></a>3. 在进行完(2)后</h3><p>检查栈s1是否为空..若不为空，则将栈中元素依次弹出并压入栈s2中（不包括’#’）；</p>
+<h3 id="4-完成上述步骤后，栈s2便为逆波兰式输出结果。"><a href="#4-完成上述步骤后，栈s2便为逆波兰式输出结果。" class="headerlink" title="4. 完成上述步骤后，栈s2便为逆波兰式输出结果。"></a>4. 完成上述步骤后，栈s2便为逆波兰式输出结果。</h3><p>但是栈s2应做一下逆序处理，因为此时表达式的首字符位于栈底；</p>
+<p><a href="http://www.wangnunu.com/2016/04/05/java%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BD%9C%E4%B8%9A%E4%B9%8B%E4%B8%AD%E7%BC%80%E8%AE%A1%E7%AE%97%E5%BC%8F%EF%BC%88%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%89/" target="_blank" rel="noopener">http://www.wangnunu.com/2016/04/05/java%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BD%9C%E4%B8%9A%E4%B9%8B%E4%B8%AD%E7%BC%80%E8%AE%A1%E7%AE%97%E5%BC%8F%EF%BC%88%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%89/</a></p>
+<h2 id="计算后缀表达式的结果"><a href="#计算后缀表达式的结果" class="headerlink" title="计算后缀表达式的结果"></a>计算后缀表达式的结果</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/08_algorithm/2012-10-26-%E7%AE%97%E6%B3%95-%E4%BD%BF%E7%94%A8%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AE%9E%E7%8E%B0%E8%AE%A1%E7%AE%97%E5%99%A8/" data-id="ck2yu6vt600162gtr6zkj88mh" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/14/08_algorithm/2015-04-07-%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          08_algorithm/2015-04-07-逆波兰表达式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/14/07_database/2015-09-08-oracle%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">07_database/2015-09-08-oracle数据库常用命令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80-JAVA/">编程语言-JAVA</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 10px;">Java</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-07-13-Heap%20and%20Priority%20Queue/">12_course/cs61b/2018-07-13-Heap and Priority Queue</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-list-01/">12_course/cs61b/2018-05-06-list-01</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-deque-ArrayDeque/">12_course/cs61b/2018-05-06-deque-ArrayDeque</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-Abstract%20Data%20Structure/">12_course/cs61b/2018-05-06-Abstract Data Structure</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61a/2017-03-22-SICP-lecture15%20Objects/">12_course/cs61a/2017-03-22-SICP-lecture15 Objects</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 lrouter<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

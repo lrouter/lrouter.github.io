@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>02_java/2016-10-25-JAVA学习笔记03_对象的相等比较 | lrouter的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一. 比较对象的两种方法比较对象是否相等有两种方法：  使用==运算符 使用equals方法  1. ==运算符==运算符，比较的是两个对象引用的值是否相等，也就是判断两个对象引用是否引用的是同一个对象。 例子1： 123String str1 = new String(&quot;Hello&quot;);String str2 = new String(&quot;Hello&quot;);System.out.println(st">
+<meta name="keywords" content="云计算 linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="02_java&#x2F;2016-10-25-JAVA学习笔记03_对象的相等比较">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;14&#x2F;02_java&#x2F;2016-10-25-JAVA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B003_%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%9B%B8%E7%AD%89%E6%AF%94%E8%BE%83&#x2F;index.html">
+<meta property="og:site_name" content="lrouter的博客">
+<meta property="og:description" content="一. 比较对象的两种方法比较对象是否相等有两种方法：  使用==运算符 使用equals方法  1. ==运算符==运算符，比较的是两个对象引用的值是否相等，也就是判断两个对象引用是否引用的是同一个对象。 例子1： 123String str1 = new String(&quot;Hello&quot;);String str2 = new String(&quot;Hello&quot;);System.out.println(st">
+<meta property="og:locale" content="cn-zh">
+<meta property="og:updated_time" content="2018-02-20T15:46:25.027Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="lrouter的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">lrouter的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-02_java/2016-10-25-JAVA学习笔记03_对象的相等比较" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/02_java/2016-10-25-JAVA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B003_%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%9B%B8%E7%AD%89%E6%AF%94%E8%BE%83/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.478Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      02_java/2016-10-25-JAVA学习笔记03_对象的相等比较
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一-比较对象的两种方法"><a href="#一-比较对象的两种方法" class="headerlink" title="一. 比较对象的两种方法"></a>一. 比较对象的两种方法</h2><p>比较对象是否相等有两种方法：</p>
+<ul>
+<li>使用==运算符</li>
+<li>使用equals方法</li>
+</ul>
+<h3 id="1-运算符"><a href="#1-运算符" class="headerlink" title="1. ==运算符"></a>1. ==运算符</h3><p>==运算符，比较的是两个对象引用的值是否相等，也就是判断两个对象引用是否引用的是同一个对象。</p>
+<p>例子1：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String str1 = <span class="keyword">new</span> String(<span class="string">"Hello"</span>);</span><br><span class="line">String str2 = <span class="keyword">new</span> String(<span class="string">"Hello"</span>);</span><br><span class="line">System.out.println(str1 == str2);</span><br></pre></td></tr></table></figure>
+
+<p>最后输出的结果是false。</p>
+<p>因为str1和str2是两个变量，是两个不同的String对象的引用。这两个String对象，在内存的堆上都有自己独立的位置。</p>
+<p>结果str1和str2引用的是不同的两个对象，str1和str2的值并不相等。</p>
+<h3 id="2-equals方法"><a href="#2-equals方法" class="headerlink" title="2. equals方法"></a>2. equals方法</h3><p>equals方法是Object类中的方法。Object是Java中所有类的父类，所以所有类都有这个方法。</p>
+<p>Object类中的equals方法，比较的是两个对象引用的值是否相等，也就是判断两个对象引用是否引用的是同一个对象。和==运算符是一样的。</p>
+<p>但是这并不是我们想要的。</p>
+<h2 id="真正想要的结果"><a href="#真正想要的结果" class="headerlink" title="真正想要的结果"></a>真正想要的结果</h2><p>那么我们在比较两个是否相等时，我们真正想要的结果是什么？我们判断的依据又是什么呢？</p>
+<p>还是以上面的例子1为例来说明。</p>
+<p>在比较变量str1和str2引用的两个对象时，两个对象的内容都是”Hello”字符串。我们希望这两个对象是相等的。</p>
+<p>再看例子2：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> String name;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> high;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">Student</span><span class="params">(String name, <span class="keyword">int</span> age, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.high = high;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.age;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getHigh</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.high;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">setHigh</span><span class="params">(<span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.high = high;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test01</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Student stu1 = <span class="keyword">new</span> Student(<span class="string">"xiaoWang"</span>, <span class="number">12</span>, <span class="number">130</span>);</span><br><span class="line">    Student stu2 = <span class="keyword">new</span> Student(<span class="string">"xiaoWang"</span>, <span class="number">12</span>, <span class="number">130</span>);</span><br><span class="line">    </span><br><span class="line">    System.out.println(stu1.equals(stu2));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们希望程序的输出结果是什么呢？我们希望输出true。因为stu1和stu2的name，age和high都是一样的。</p>
+<p>也就是说希望在使用equals方法时，比较的是两个对象的状态是否相等。对象状态，指的就是对象的所有属性的值。</p>
+<h2 id="重写equals方法"><a href="#重写equals方法" class="headerlink" title="重写equals方法"></a>重写equals方法</h2><p>我们希望在使用equals方法时，比较的是两个对象的状态是否相等。<br>但是从Oject类继承的equals方法，比较的是两个对象引用的是否是同一个对象。<br>因此我们需要在创建自己类的时候，重写equals方法使得在比较对象时，比较的是对象的状态而不是对象的引用。</p>
+<p>如果两个对象引用同一个对象，那么使用equals比较对象状态时肯定是判断相等，因为他们指向的是同一个对象啊！</p>
+<p>String类就是重写了equals方法。</p>
+<p>例如我们可以在Student类中重写equals方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equal</span><span class="params">(Object otherObject)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// a quick test to see if the objects are identical</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> == otherObject) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// must return false if the explicit parameter is null</span></span><br><span class="line">    <span class="keyword">if</span> (otherObject == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// if the classes don't match, they can't be equal</span></span><br><span class="line">    <span class="keyword">if</span>(getClass() != otherObject.getClass())</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">      </span><br><span class="line">    <span class="comment">// now we know otherObject is a non-null Student</span></span><br><span class="line">    Student other = (Student) otherObject;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//test whether the fields have identical values</span></span><br><span class="line">    <span class="keyword">return</span> name.equals(other.getName()) </span><br><span class="line">      &amp;&amp; age == other.getAge()</span><br><span class="line">      &amp;&amp; high == other.getHigh();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在重写的方法中：</p>
+<ul>
+<li><p>第一步，先比较两个对象引用是否相等，如果是就返回true。如果不是，就继续往下看。</p>
+</li>
+<li><p>第二步，看otherObject是否为null，如果是就返回false。如果不是，继续往下看。</p>
+</li>
+<li><p>第三步，看两个对象引用的对象，是否是同一类型。如果不是就返回false。</p>
+<pre><code>这一步使用的是getClass方法，而不是instanceof，因为instanceof用于判断对象是否是某个类，或者是该类的子类的实例。例如stu1是Student类也是            Object类的实例。</code></pre></li>
+<li><p>第四步，依次比较两个对象的所有属性的值是否相等。</p>
+</li>
+</ul>
+<h2 id="推荐使用的方法"><a href="#推荐使用的方法" class="headerlink" title="推荐使用的方法"></a>推荐使用的方法</h2><p>推荐重写equals方法，然后使用equals方法来比较对象是否相等。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/02_java/2016-10-25-JAVA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B003_%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%9B%B8%E7%AD%89%E6%AF%94%E8%BE%83/" data-id="ck2yu6vs5000b2gtre4c47ej6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/14/02_java/2016-10-26-Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_04_JSP%E7%9A%84session%E5%92%8Ccookie/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          02_java/2016-10-26-Java学习笔记_04_JSP的session和cookie
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/14/02_java/2016-10-18-JAVA%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">02_java/2016-10-18-JAVA数据结构</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80-JAVA/">编程语言-JAVA</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 10px;">Java</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-07-13-Heap%20and%20Priority%20Queue/">12_course/cs61b/2018-07-13-Heap and Priority Queue</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-list-01/">12_course/cs61b/2018-05-06-list-01</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-deque-ArrayDeque/">12_course/cs61b/2018-05-06-deque-ArrayDeque</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-Abstract%20Data%20Structure/">12_course/cs61b/2018-05-06-Abstract Data Structure</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61a/2017-03-22-SICP-lecture15%20Objects/">12_course/cs61a/2017-03-22-SICP-lecture15 Objects</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 lrouter<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

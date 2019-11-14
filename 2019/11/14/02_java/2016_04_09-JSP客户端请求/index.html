@@ -5,17 +5,17 @@
   
 
   
-  <title>Hello World | lrouter的博客</title>
+  <title>02_java/2016_04_09-JSP客户端请求 | lrouter的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="HTTP头部信息客户端浏览器发出的HTTP请求，会带有一个HTTP头部，该头部包含以下信息，这些信息贯穿了JAVA WEB编程的所有项目：    信息 描述    Accept 指定浏览器或其他客户端可以处理的MIME类型。它的值通常为 image&#x2F;png 或 image&#x2F;jpeg   Accept-Charset 指定浏览器要使用的字符集。比如 ISO-8859-1   Accept-Encod">
 <meta name="keywords" content="云计算 linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;14&#x2F;hello-world&#x2F;index.html">
+<meta property="og:title" content="02_java&#x2F;2016_04_09-JSP客户端请求">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;14&#x2F;02_java&#x2F;2016_04_09-JSP%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%B7%E6%B1%82&#x2F;index.html">
 <meta property="og:site_name" content="lrouter的博客">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="HTTP头部信息客户端浏览器发出的HTTP请求，会带有一个HTTP头部，该头部包含以下信息，这些信息贯穿了JAVA WEB编程的所有项目：    信息 描述    Accept 指定浏览器或其他客户端可以处理的MIME类型。它的值通常为 image&#x2F;png 或 image&#x2F;jpeg   Accept-Charset 指定浏览器要使用的字符集。比如 ISO-8859-1   Accept-Encod">
 <meta property="og:locale" content="cn-zh">
-<meta property="og:updated_time" content="2019-11-14T13:51:10.751Z">
+<meta property="og:updated_time" content="2018-05-05T16:50:08.507Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="lrouter的博客" type="application/atom+xml">
@@ -63,10 +63,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-02_java/2016_04_09-JSP客户端请求" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/11/14/hello-world/" class="article-date">
-  <time datetime="2019-11-14T13:51:10.751Z" itemprop="datePublished">2019-11-14</time>
+    <a href="/2019/11/14/02_java/2016_04_09-JSP%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%B7%E6%B1%82/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.488Z" itemprop="datePublished">2019-11-14</time>
 </a>
     
   </div>
@@ -77,7 +77,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      02_java/2016_04_09-JSP客户端请求
     </h1>
   
 
@@ -85,24 +85,79 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h2 id="HTTP头部信息"><a href="#HTTP头部信息" class="headerlink" title="HTTP头部信息"></a>HTTP头部信息</h2><p>客户端浏览器发出的HTTP请求，会带有一个HTTP头部，该头部包含以下信息，这些信息贯穿了JAVA WEB编程的所有项目：</p>
+<table>
+<thead>
+<tr>
+<th align="left">信息</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Accept</td>
+<td>指定浏览器或其他客户端可以处理的MIME类型。它的值通常为 image/png 或 image/jpeg</td>
+</tr>
+<tr>
+<td align="left">Accept-Charset</td>
+<td>指定浏览器要使用的字符集。比如 ISO-8859-1</td>
+</tr>
+<tr>
+<td align="left">Accept-Encoding</td>
+<td>指定编码类型。它的值通常为 gzip 或compress</td>
+</tr>
+<tr>
+<td align="left">Accept-Language</td>
+<td>指定客户端首选语言，servlet会优先返回以当前语言构成的结果集，如果servlet支持这种语言的话。比如 en，en-us，ru等等</td>
+</tr>
+<tr>
+<td align="left">Authorization</td>
+<td>在访问受密码保护的网页时识别不同的用户</td>
+</tr>
+<tr>
+<td align="left">Connection</td>
+<td>表明客户端是否可以处理HTTP持久连接。持久连接允许客户端或浏览器在一个请求中获取多个文件。Keep-Alive 表示启用持久连接</td>
+</tr>
+<tr>
+<td align="left">Content-Length</td>
+<td>仅适用于POST请求，表示 POST 数据的字节数</td>
+</tr>
+<tr>
+<td align="left">Cookie</td>
+<td>返回先前发送给浏览器的cookies至服务器</td>
+</tr>
+<tr>
+<td align="left">Host</td>
+<td>指出原始URL中的主机名和端口号</td>
+</tr>
+<tr>
+<td align="left">If-Modified-Since</td>
+<td>表明只有当网页在指定的日期被修改后客户端才需要这个网页。 服务器发送304码给客户端，表示没有更新的资源</td>
+</tr>
+<tr>
+<td align="left">If-Unmodified-Since</td>
+<td>与If-Modified-Since相反， 只有文档在指定日期后仍未被修改过，操作才会成功</td>
+</tr>
+<tr>
+<td align="left">Referer</td>
+<td>标志着所引用页面的URL。比如，如果你在页面1，然后点了个链接至页面2，那么页面1的URL就会包含在浏览器请求页面2的信息头中</td>
+</tr>
+<tr>
+<td align="left">User-Agent</td>
+<td>用来区分不同浏览器或客户端发送的请求，并对不同类型的浏览器返回不同的内容</td>
+</tr>
+</tbody></table>
+<h2 id="JSP-Request对象"><a href="#JSP-Request对象" class="headerlink" title="JSP Request对象"></a>JSP Request对象</h2><p>Request对象提供了一系列的方法，用来处理客户端请求的HTTP头部信息。包括表单数据，cookies，HTTP方法等等。</p>
+<p>例如：</p>
+<ul>
+<li>String getRemoteHost() 返回客户端的完整名称</li>
+<li>HttpSession getSession() 返回request对应的session对象，如果没有，则创建一个</li>
+<li>boolean isSecure() 返回request是否使用了加密通道，比如HTTPS</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/14/hello-world/" data-id="ck2yu6vr200012gtr4zfa4jv2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/14/02_java/2016_04_09-JSP%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%B7%E6%B1%82/" data-id="ck2yu6vsf000g2gtr8fwc9dqa" class="article-share-link">Share</a>
       
       
     </footer>
@@ -111,19 +166,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/11/14/README/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/11/14/02_java/2016_04_09-JSP%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%93%8D%E5%BA%94/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          README
+          02_java/2016_04_09-JSP服务器响应
         
       </div>
     </a>
   
   
-    <a href="/2017/09/23/02_java/2017-09-23-JAVA%E9%87%8D%E8%AF%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/11/14/02_java/2016-10-26-Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_06_MySql%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">java学习笔记_01</div>
+      <div class="article-nav-title">02_java/2016-10-26-Java学习笔记_06_MySql学习笔记</div>
     </a>
   
 </nav>

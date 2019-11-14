@@ -5,17 +5,17 @@
   
 
   
-  <title>Hello World | lrouter的博客</title>
+  <title>02_java/2016_04_09-JSP服务器响应 | lrouter的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="HTTP响应头1个服务器回复的HTTP响应报文，包含以下头部信息：    响应头 描述    Allow 指定服务器支持的request方法（GET，POST等等）   Cache-Control 指定响应文档能够被安全缓存的情况。通常取值为 public，private 或no-cache 等等。 Public意味着文档可缓存，Private意味着文档只为单用户服务并且只能使用私有缓存。No-c">
 <meta name="keywords" content="云计算 linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;14&#x2F;hello-world&#x2F;index.html">
+<meta property="og:title" content="02_java&#x2F;2016_04_09-JSP服务器响应">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;14&#x2F;02_java&#x2F;2016_04_09-JSP%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%93%8D%E5%BA%94&#x2F;index.html">
 <meta property="og:site_name" content="lrouter的博客">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="HTTP响应头1个服务器回复的HTTP响应报文，包含以下头部信息：    响应头 描述    Allow 指定服务器支持的request方法（GET，POST等等）   Cache-Control 指定响应文档能够被安全缓存的情况。通常取值为 public，private 或no-cache 等等。 Public意味着文档可缓存，Private意味着文档只为单用户服务并且只能使用私有缓存。No-c">
 <meta property="og:locale" content="cn-zh">
-<meta property="og:updated_time" content="2019-11-14T13:51:10.751Z">
+<meta property="og:updated_time" content="2018-05-05T16:50:08.507Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="lrouter的博客" type="application/atom+xml">
@@ -63,10 +63,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-02_java/2016_04_09-JSP服务器响应" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/11/14/hello-world/" class="article-date">
-  <time datetime="2019-11-14T13:51:10.751Z" itemprop="datePublished">2019-11-14</time>
+    <a href="/2019/11/14/02_java/2016_04_09-JSP%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%93%8D%E5%BA%94/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.492Z" itemprop="datePublished">2019-11-14</time>
 </a>
     
   </div>
@@ -77,7 +77,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      02_java/2016_04_09-JSP服务器响应
     </h1>
   
 
@@ -85,24 +85,83 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h2 id="HTTP响应头"><a href="#HTTP响应头" class="headerlink" title="HTTP响应头"></a>HTTP响应头</h2><p>1个服务器回复的HTTP响应报文，包含以下头部信息：</p>
+<table>
+<thead>
+<tr>
+<th align="left">响应头</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Allow</td>
+<td>指定服务器支持的request方法（GET，POST等等）</td>
+</tr>
+<tr>
+<td align="left">Cache-Control</td>
+<td>指定响应文档能够被安全缓存的情况。通常取值为 public，private 或no-cache 等等。 Public意味着文档可缓存，Private意味着文档只为单用户服务并且只能使用私有缓存。No-cache 意味着文档不被缓存。</td>
+</tr>
+<tr>
+<td align="left">Connection</td>
+<td>命令浏览器是否要使用持久的HTTP连接。close值 命令浏览器不使用持久HTTP连接，而keep-alive 意味着使用持久化连接。</td>
+</tr>
+<tr>
+<td align="left">Content-Disposition</td>
+<td>让浏览器要求用户将响应以给定的名称存储在磁盘中</td>
+</tr>
+<tr>
+<td align="left">Content-Encoding</td>
+<td>指定传输时页面的编码规则</td>
+</tr>
+<tr>
+<td align="left">Content-Language</td>
+<td>表述文档所使用的语言，比如en， en-us,，ru等等</td>
+</tr>
+<tr>
+<td align="left">Content-Length</td>
+<td>表明响应的字节数。只有在浏览器使用持久化 (keep-alive) HTTP 连接时才有用</td>
+</tr>
+<tr>
+<td align="left">Content-Type</td>
+<td>表明文档使用的MIME类型</td>
+</tr>
+<tr>
+<td align="left">Expires</td>
+<td>指明啥时候过期并从缓存中移除</td>
+</tr>
+<tr>
+<td align="left">Last-Modified</td>
+<td>指明文档最后修改时间。客户端可以 缓存文档并且在后续的请求中提供一个 If-Modified-Since请求头</td>
+</tr>
+<tr>
+<td align="left">Location</td>
+<td>在300秒内，包含所有的有一个状态码的响应地址，浏览器会自动重连然后检索新文档</td>
+</tr>
+<tr>
+<td align="left">Refresh</td>
+<td>指明浏览器每隔多久请求更新一次页面。</td>
+</tr>
+<tr>
+<td align="left">Retry-After</td>
+<td>与503 (Service Unavailable)一起使用来告诉用户多久后请求将会得到响应</td>
+</tr>
+<tr>
+<td align="left">Set-Cookie</td>
+<td>指明当前页面对应的cookie</td>
+</tr>
+</tbody></table>
+<h2 id="JSP-Responce对象"><a href="#JSP-Responce对象" class="headerlink" title="JSP Responce对象"></a>JSP Responce对象</h2><p>JSP的Responce对象，提供了一系列的方法，用于操作HTTP响应头部。</p>
+<p>可以添加新的cookie或时间戳，还有HTTP状态码等等。</p>
+<p>例如：</p>
+<ul>
+<li>void addCookie(Cookie cookie) 添加指定的cookie至响应中</li>
+<li>void addIntHeader(String name, int value) 添加指定名称的响应头和int值</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/14/hello-world/" data-id="ck2yu6vr200012gtr4zfa4jv2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/14/02_java/2016_04_09-JSP%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%93%8D%E5%BA%94/" data-id="ck2yu6vsf000h2gtrg1egade2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -111,19 +170,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/11/14/README/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/11/14/02_java/2016_04_09-JSP%E8%AF%AD%E6%B3%95_%E6%8C%87%E4%BB%A4%E5%92%8C%E5%8A%A8%E4%BD%9C/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          README
+          02_java/2016_04_09-JSP语法_指令和动作
         
       </div>
     </a>
   
   
-    <a href="/2017/09/23/02_java/2017-09-23-JAVA%E9%87%8D%E8%AF%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/11/14/02_java/2016_04_09-JSP%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%B7%E6%B1%82/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">java学习笔记_01</div>
+      <div class="article-nav-title">02_java/2016_04_09-JSP客户端请求</div>
     </a>
   
 </nav>

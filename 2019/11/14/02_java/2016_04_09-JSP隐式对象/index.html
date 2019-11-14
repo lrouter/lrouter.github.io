@@ -5,17 +5,17 @@
   
 
   
-  <title>Hello World | lrouter的博客</title>
+  <title>02_java/2016_04_09-JSP隐式对象 | lrouter的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="隐式对象在JSP文件中，可以无需显式的声明和创建一些对象，就可以直接使用它们。这些对象，叫做隐式对象。 JSP所支持的九大隐式对象：    对象 描述    request HttpServletRequest类的实例   response HttpServletResponse类的实例   out JspWriter类的实例，用于把结果输出至网页上   session HttpSession类的">
 <meta name="keywords" content="云计算 linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;14&#x2F;hello-world&#x2F;index.html">
+<meta property="og:title" content="02_java&#x2F;2016_04_09-JSP隐式对象">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;14&#x2F;02_java&#x2F;2016_04_09-JSP%E9%9A%90%E5%BC%8F%E5%AF%B9%E8%B1%A1&#x2F;index.html">
 <meta property="og:site_name" content="lrouter的博客">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="隐式对象在JSP文件中，可以无需显式的声明和创建一些对象，就可以直接使用它们。这些对象，叫做隐式对象。 JSP所支持的九大隐式对象：    对象 描述    request HttpServletRequest类的实例   response HttpServletResponse类的实例   out JspWriter类的实例，用于把结果输出至网页上   session HttpSession类的">
 <meta property="og:locale" content="cn-zh">
-<meta property="og:updated_time" content="2019-11-14T13:51:10.751Z">
+<meta property="og:updated_time" content="2018-05-05T16:50:08.507Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="lrouter的博客" type="application/atom+xml">
@@ -63,10 +63,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-02_java/2016_04_09-JSP隐式对象" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/11/14/hello-world/" class="article-date">
-  <time datetime="2019-11-14T13:51:10.751Z" itemprop="datePublished">2019-11-14</time>
+    <a href="/2019/11/14/02_java/2016_04_09-JSP%E9%9A%90%E5%BC%8F%E5%AF%B9%E8%B1%A1/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.502Z" itemprop="datePublished">2019-11-14</time>
 </a>
     
   </div>
@@ -77,7 +77,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      02_java/2016_04_09-JSP隐式对象
     </h1>
   
 
@@ -85,24 +85,67 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h2 id="隐式对象"><a href="#隐式对象" class="headerlink" title="隐式对象"></a>隐式对象</h2><p>在JSP文件中，可以无需显式的声明和创建一些对象，就可以直接使用它们。这些对象，叫做隐式对象。</p>
+<p>JSP所支持的九大隐式对象：</p>
+<table>
+<thead>
+<tr>
+<th>对象</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>request</td>
+<td>HttpServletRequest类的实例</td>
+</tr>
+<tr>
+<td>response</td>
+<td>HttpServletResponse类的实例</td>
+</tr>
+<tr>
+<td>out</td>
+<td>JspWriter类的实例，用于把结果输出至网页上</td>
+</tr>
+<tr>
+<td>session</td>
+<td>HttpSession类的实例</td>
+</tr>
+<tr>
+<td>application</td>
+<td>ServletContext类的实例，与应用上下文有关</td>
+</tr>
+<tr>
+<td>config</td>
+<td>ServletConfig类的实例</td>
+</tr>
+<tr>
+<td>pageContext</td>
+<td>PageContext类的实例，提供对JSP页面所有对象以及命名空间的访问</td>
+</tr>
+<tr>
+<td>page</td>
+<td>类似于Java类中的this关键字</td>
+</tr>
+<tr>
+<td>Exception</td>
+<td>Exception类的对象，代表发生错误的JSP页面中对应的异常对象</td>
+</tr>
+</tbody></table>
+<h2 id="request和response对象"><a href="#request和response对象" class="headerlink" title="request和response对象"></a>request和response对象</h2><p>每当1个客户端请求JSP页面时，就会产生1个对应的request和response对象。</p>
+<p>request对象代表请求，该对象提供了一系列的方法用来获取HTTP头信息，cookies，HTTP方法等。</p>
+<p>response对象代表响应，该对象提供了一系列的方法用来设置响应的内容，例如cookies，时间戳，HTTP状态吗等。</p>
+<h2 id="out对象"><a href="#out对象" class="headerlink" title="out对象"></a>out对象</h2><p>可以使用out对象直接往response对象里面写入内容。这些内容直接输出到响应网页中。</p>
+<h2 id="session对象"><a href="#session对象" class="headerlink" title="session对象"></a>session对象</h2><p>session对象和Java Servlets中的session对象有一样的行为。</p>
+<p>session对象用来跟踪在各个客户端请求间的会话。</p>
+<h2 id="application对象"><a href="#application对象" class="headerlink" title="application对象"></a>application对象</h2><p>这个对象在JSP页面的整个生命周期中都代表着这个JSP页面。这个对象在JSP页面初始化时被创建，随着jspDestroy()方法的调用而被移除。</p>
+<p>通过向application中添加属性，则所有组成您web应用的JSP文件都能访问到这些属性。</p>
+<h2 id="page-对象"><a href="#page-对象" class="headerlink" title="page 对象"></a>page 对象</h2><p>这个对象就是页面实例的引用。它可以被看做是整个JSP页面的代表。</p>
+<p>page 对象就是this对象的同义词</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/14/hello-world/" data-id="ck2yu6vr200012gtr4zfa4jv2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/14/02_java/2016_04_09-JSP%E9%9A%90%E5%BC%8F%E5%AF%B9%E8%B1%A1/" data-id="ck2yu6vsj000l2gtr0dbjfyri" class="article-share-link">Share</a>
       
       
     </footer>
@@ -111,19 +154,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/11/14/README/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/11/14/02_java/2016_04_09-Tomcat%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          README
+          02_java/2016_04_09-Tomcat的安装与配置
         
       </div>
     </a>
   
   
-    <a href="/2017/09/23/02_java/2017-09-23-JAVA%E9%87%8D%E8%AF%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/11/14/02_java/2016_04_09-JSP%E8%BF%87%E6%BB%A4%E5%99%A8/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">java学习笔记_01</div>
+      <div class="article-nav-title">02_java/2016_04_09-JSP过滤器</div>
     </a>
   
 </nav>

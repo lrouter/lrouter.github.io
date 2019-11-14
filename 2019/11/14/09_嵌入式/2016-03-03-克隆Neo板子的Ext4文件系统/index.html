@@ -5,17 +5,17 @@
   
 
   
-  <title>Hello World | lrouter的博客</title>
+  <title>09_嵌入式/2016-03-03-克隆Neo板子的Ext4文件系统 | lrouter的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="板子的分区现有板子上有两个分区， 删除&#x2F;etc&#x2F;fs.resized文件文件系统自动扩展分区。不然剩下的空间不会被文件系统占满。 禁止pi用户自动登录修改&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;serial-getty@ttyS0.service.d&#x2F;autologin.conf文件，注释掉最后两行，禁止pi用户通过串口自动登录 root用户登录修改&#x2F;etc&#x2F;sudoers文件，添加pi ALL=">
 <meta name="keywords" content="云计算 linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;14&#x2F;hello-world&#x2F;index.html">
+<meta property="og:title" content="09_嵌入式&#x2F;2016-03-03-克隆Neo板子的Ext4文件系统">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;14&#x2F;09_%E5%B5%8C%E5%85%A5%E5%BC%8F&#x2F;2016-03-03-%E5%85%8B%E9%9A%86Neo%E6%9D%BF%E5%AD%90%E7%9A%84Ext4%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F&#x2F;index.html">
 <meta property="og:site_name" content="lrouter的博客">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="板子的分区现有板子上有两个分区， 删除&#x2F;etc&#x2F;fs.resized文件文件系统自动扩展分区。不然剩下的空间不会被文件系统占满。 禁止pi用户自动登录修改&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;serial-getty@ttyS0.service.d&#x2F;autologin.conf文件，注释掉最后两行，禁止pi用户通过串口自动登录 root用户登录修改&#x2F;etc&#x2F;sudoers文件，添加pi ALL=">
 <meta property="og:locale" content="cn-zh">
-<meta property="og:updated_time" content="2019-11-14T13:51:10.751Z">
+<meta property="og:updated_time" content="2018-02-20T15:45:44.913Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="lrouter的博客" type="application/atom+xml">
@@ -63,10 +63,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-09_嵌入式/2016-03-03-克隆Neo板子的Ext4文件系统" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/11/14/hello-world/" class="article-date">
-  <time datetime="2019-11-14T13:51:10.751Z" itemprop="datePublished">2019-11-14</time>
+    <a href="/2019/11/14/09_%E5%B5%8C%E5%85%A5%E5%BC%8F/2016-03-03-%E5%85%8B%E9%9A%86Neo%E6%9D%BF%E5%AD%90%E7%9A%84Ext4%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.566Z" itemprop="datePublished">2019-11-14</time>
 </a>
     
   </div>
@@ -77,7 +77,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      09_嵌入式/2016-03-03-克隆Neo板子的Ext4文件系统
     </h1>
   
 
@@ -85,24 +85,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h2 id="板子的分区"><a href="#板子的分区" class="headerlink" title="板子的分区"></a>板子的分区</h2><p>现有板子上有两个分区，</p>
+<h2 id="删除-etc-fs-resized文件"><a href="#删除-etc-fs-resized文件" class="headerlink" title="删除/etc/fs.resized文件"></a>删除/etc/fs.resized文件</h2><p>文件系统自动扩展分区。不然剩下的空间不会被文件系统占满。</p>
+<h2 id="禁止pi用户自动登录"><a href="#禁止pi用户自动登录" class="headerlink" title="禁止pi用户自动登录"></a>禁止pi用户自动登录</h2><p>修改/etc/systemd/system/serial-getty@ttyS0.service.d/autologin.conf文件，注释掉最后两行，禁止pi用户通过串口自动登录</p>
+<h2 id="root用户登录"><a href="#root用户登录" class="headerlink" title="root用户登录"></a>root用户登录</h2><p>修改/etc/sudoers文件，添加pi ALL=(ALL:ALL) ALL，使得pi用户可以执行sudo，进而执行nmcli；</p>
+<p>root用户修改/usr/bin/sudo的权限：chmod u+s /usr/bin/sudo；使得pi用户可以执行sudo；</p>
+<p>root用户修改pi用户的密码：passwd pi；</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/14/hello-world/" data-id="ck2yu6vr200012gtr4zfa4jv2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/14/09_%E5%B5%8C%E5%85%A5%E5%BC%8F/2016-03-03-%E5%85%8B%E9%9A%86Neo%E6%9D%BF%E5%AD%90%E7%9A%84Ext4%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" data-id="ck2yu6vt700172gtr7dyx7yi0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -111,19 +104,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/11/14/README/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/11/14/09_%E5%B5%8C%E5%85%A5%E5%BC%8F/2017-03-29-%E6%8F%90%E5%8F%96%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E7%AC%ACn%E5%92%8Cm%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B9%8B%E9%97%B4%E7%9A%84%E6%89%80%E6%9C%89%E8%A1%8C/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          README
+          09_嵌入式/2017-03-29-提取日志文件中的第n和m个字符之间的所有行
         
       </div>
     </a>
   
   
-    <a href="/2017/09/23/02_java/2017-09-23-JAVA%E9%87%8D%E8%AF%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/11/14/08_algorithm/2015-04-07-%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">java学习笔记_01</div>
+      <div class="article-nav-title">08_algorithm/2015-04-07-逆波兰表达式</div>
     </a>
   
 </nav>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>12_course/cs61b/2018-05-06-list-01 | lrouter的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. listlist是一种包含有一系列数据的数据结构，数据的排列方式是一个接着一个的。 list里面的数据，可以重复。 list数据结构，可以使用链表实现，因为链表就是1个接着1个的序列：  每个节点保存1个数据; 当前的节点指向下一个节点。这样所有的节点就一个接一个的串接起来了，形成1个序列。  list数据结构，也可以使用数组来实现，因为数组的元素都是1个挨着1个的:  每个元素保存1个数据">
+<meta name="keywords" content="云计算 linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="12_course&#x2F;cs61b&#x2F;2018-05-06-list-01">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;14&#x2F;12_course&#x2F;cs61b&#x2F;2018-05-06-list-01&#x2F;index.html">
+<meta property="og:site_name" content="lrouter的博客">
+<meta property="og:description" content="1. listlist是一种包含有一系列数据的数据结构，数据的排列方式是一个接着一个的。 list里面的数据，可以重复。 list数据结构，可以使用链表实现，因为链表就是1个接着1个的序列：  每个节点保存1个数据; 当前的节点指向下一个节点。这样所有的节点就一个接一个的串接起来了，形成1个序列。  list数据结构，也可以使用数组来实现，因为数组的元素都是1个挨着1个的:  每个元素保存1个数据">
+<meta property="og:locale" content="cn-zh">
+<meta property="og:updated_time" content="2018-05-05T18:48:58.852Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="lrouter的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">lrouter的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-12_course/cs61b/2018-05-06-list-01" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/12_course/cs61b/2018-05-06-list-01/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.605Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      12_course/cs61b/2018-05-06-list-01
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-list"><a href="#1-list" class="headerlink" title="1. list"></a>1. list</h2><p>list是一种包含有一系列数据的数据结构，数据的排列方式是一个接着一个的。</p>
+<p>list里面的数据，可以重复。</p>
+<p>list数据结构，可以使用链表实现，因为链表就是1个接着1个的序列：</p>
+<ul>
+<li>每个节点保存1个数据;</li>
+<li>当前的节点指向下一个节点。这样所有的节点就一个接一个的串接起来了，形成1个序列。</li>
+</ul>
+<p>list数据结构，也可以使用数组来实现，因为数组的元素都是1个挨着1个的:</p>
+<ul>
+<li>每个元素保存1个数据；</li>
+<li>每个元素都可以直接通过数组的索引来访问。</li>
+</ul>
+<h2 id="2-对外的API接口"><a href="#2-对外的API接口" class="headerlink" title="2. 对外的API接口"></a>2. 对外的API接口</h2><p>用户通过list对外提供的API接口，来使用list，而不用去关心API的内部实现到底是链表还是数组。</p>
+<p>用户只是想要list这种数据结构的特性，也就是1个接1个的数据序列，数据可以重复。</p>
+<p>API接口对用户呈现出了这些list的特性，但是隐藏了list的内部实现。</p>
+<h2 id="3-链表的实现-LinkedList"><a href="#3-链表的实现-LinkedList" class="headerlink" title="3. 链表的实现 - LinkedList"></a>3. 链表的实现 - LinkedList</h2><p>我们想要用链表来实现list，那么就需要知道链表的特点：</p>
+<ul>
+<li>链表是由结点(node)构成的；</li>
+<li>结点内部存储了1个数据，也存储了下一个节点的“指针”；</li>
+<li>要访问某个结点，只能挨个遍历所有结点，直到找到目的结点为止；慢；</li>
+<li>在链表中间做插入和删除运算；很快；</li>
+</ul>
+<p>我们先来通过链表实现1个存储int型数据的list。</p>
+<h3 id="3-1-laked-linkedlist"><a href="#3-1-laked-linkedlist" class="headerlink" title="3.1 laked linkedlist"></a>3.1 laked linkedlist</h3><p>我们这样定义链表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class IntList &#123;</span><br><span class="line">   public int first;</span><br><span class="line">   public IntList rest;</span><br><span class="line"> </span><br><span class="line">   public IntList(int f, IntList r) &#123;</span><br><span class="line">      first = f;</span><br><span class="line">      rest = r;</span><br><span class="line">   &#125;</span><br><span class="line">   ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样定义的链表是一种递归模式的链表：</p>
+<ul>
+<li>每个结点，存储了1个数据；</li>
+<li>每个结点，又指向了余下的链表。注意是链表，而不是结点。</li>
+</ul>
+<p>我们这样来使用链表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">IntList L = new IntList(15, null);</span><br><span class="line">L = new IntList(10, L);</span><br><span class="line">L = new IntList(5, L);</span><br><span class="line">int x = L.first;</span><br></pre></td></tr></table></figure>
+
+<p>可见，作为用户而言，每次我们都得定义出1个新结点点，并需要将该结点和前面的结点联系起来。</p>
+<p>我们作为用户使用list，只想每次往list添加和删除数据，并不想自己来维护结点之间的联系。</p>
+<p>数据一个接一个的排列，这是list本身的特性，怎么维护和实现这个排列应该由list数据结构的实现者来做。</p>
+<p>所以我们做个改进。</p>
+<h3 id="3-2-improvement-linked-list"><a href="#3-2-improvement-linked-list" class="headerlink" title="3.2 improvement linked list"></a>3.2 improvement linked list</h3><p>我们先定义linkedlist的结点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class IntNode &#123;</span><br><span class="line">   public int item;</span><br><span class="line">   public IntNode next;</span><br><span class="line"> </span><br><span class="line">   public IntNode(int i, IntNode n) &#123;</span><br><span class="line">   	  item = i;</span><br><span class="line">   	  next = n;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们定义出基于结点的链表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class SLList &#123;</span><br><span class="line">   public IntNode first;</span><br><span class="line"> </span><br><span class="line">   public SLList(int x) &#123;</span><br><span class="line">      first = new IntNode(x, null);</span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   public void addFirst(int x) &#123;</span><br><span class="line">      first = new IntNode(x, first);</span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   public int getFirst() &#123;</span><br><span class="line">  	  return first.item;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们将链表的结点隐藏在了链表内部，并对外提供了添加和获取数据的方法。</p>
+<p>这样用户就不需要去维护结点之间的关系，这些关系由我们实现者来维护。对于用户而言，使用起来更为简洁，而且也不容易犯错。</p>
+<p>最后，我们来看看使用改进后的链表的例子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SLList L = new SLList(15);</span><br><span class="line">L.addFirst(10);</span><br><span class="line">L.addFirst(5); 	</span><br><span class="line">int x = L.getFirst();</span><br></pre></td></tr></table></figure>
+
+<p>可见，我们先定义出了1个链表，后面我们就只管往里面添加和查询数据。</p>
+<h3 id="3-3-nested-class"><a href="#3-3-nested-class" class="headerlink" title="3.3 nested class"></a>3.3 nested class</h3><p>我们可以将class IntNode 定义在SLList的内部，访问范围位private。</p>
+<p>如果IntNode没有使用外面类的具体对象的变量或者方法，还可以定义成static的，这样可以节省一些内存空间。</p>
+<h3 id="3-4-size"><a href="#3-4-size" class="headerlink" title="3.4 size"></a>3.4 size</h3><p>我们想要获取list的size。通过定义1个函数size()来实现。</p>
+<p>size()函数，通过遍历list的所有结点，来计算list的长度。</p>
+<p>但是这样太慢了。有没有改进的方法。</p>
+<p>我们可以在list内部维护1个size变量来缓存list的长度，这样每当添加或者删除1个元素时，我们改变size。</p>
+<p>当需要获取size时，我们就直接返回size变量。</p>
+<h3 id="3-5-Representing-the-Empty-List"><a href="#3-5-Representing-the-Empty-List" class="headerlink" title="3.5 Representing the Empty List"></a>3.5 Representing the Empty List</h3><p>如果1个list是空的怎么办，那么我们需要改变前面的实现：</p>
+<h4 id="3-5-1-list指针为null"><a href="#3-5-1-list指针为null" class="headerlink" title="3.5.1 list指针为null"></a>3.5.1 list指针为null</h4><p>我们在创建1个SLList时，将first也就是链表的指针设置为null。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class SLList &#123;</span><br><span class="line">   private IntNode first;</span><br><span class="line">   private int size;</span><br><span class="line"> </span><br><span class="line">   public SLList() &#123;</span><br><span class="line">      first = null;</span><br><span class="line">      size = 0;</span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   public void addLast(int x) &#123;</span><br><span class="line">      size += 1;</span><br><span class="line">      IntNode p = first;</span><br><span class="line">      while (p.next != null) &#123;</span><br><span class="line">         p = p.next;</span><br><span class="line">      &#125;</span><br><span class="line"> </span><br><span class="line">      p.next = new IntNode(x, null);</span><br><span class="line">   &#125; ...</span><br></pre></td></tr></table></figure>
+
+<p>这样一来，我们就得改变addFirst和addLast方法，在往链表添加结点时，需要判断链表是否是空的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public void addLast(int x) &#123;</span><br><span class="line">  size += 1;</span><br><span class="line"></span><br><span class="line">  if (first == null) &#123;</span><br><span class="line">    first = new IntNode(x, null);</span><br><span class="line">    return;</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  IntNode p = first;</span><br><span class="line">  while (p.next != null) &#123;</span><br><span class="line">    p = p.next;</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  p.next = new IntNode(x, null);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>删除时也得判断出这个特殊得情况，我们人类的大脑工作记忆是有限的。</p>
+<p>有没有办法，可以将这个特殊情况简化，当作普通情况处理呢？有的。</p>
+<h4 id="3-5-2-哨兵结点"><a href="#3-5-2-哨兵结点" class="headerlink" title="3.5.2 哨兵结点"></a>3.5.2 哨兵结点</h4><p>那就是再增加1个哨兵结点，这个sentinel结点，和普通的结点没有什么区别，只是里面不存储用户的数据。也就是不算在用户数据之类。</p>
+<p>size变量也不会统计sentinel结点。</p>
+<p>有了这个sentinel结点，在增加和删除数据时，我们就方便很多，不需要记住那么多特殊情况了。</p>
+<p><b>Invariants</b></p>
+<p>An invariant is a condition that is guaranteed to be true during code execution (assuming there are no bugs in your code).</p>
+<p>An SLList with a sentinel node has at least the following invariants:</p>
+<ul>
+<li>The sentinel reference always points to a sentinel node.</li>
+<li>The first node (if it exists), is always at sentinel.next.</li>
+<li>The size variable is always the total number of items that have been added.</li>
+</ul>
+<p>Invariants make it easier to reason about code:</p>
+<ul>
+<li>Can assume they are true to simplify code (e.g. addLast doesn’t need to worry about nulls).</li>
+<li>Must ensure that methods preserve invariants.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class SLList &#123;</span><br><span class="line">   private IntNode sentinel;</span><br><span class="line">   private int size;</span><br><span class="line"> </span><br><span class="line">   public SLList() &#123;</span><br><span class="line">      sentinel = new IntNode(x, null);</span><br><span class="line">      size = 0;</span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   public void addLast(int x) &#123;</span><br><span class="line">      size += 1;</span><br><span class="line">      IntNode p = sentinel;</span><br><span class="line">      while (p.next != null) &#123;</span><br><span class="line">         p = p.next;</span><br><span class="line">      &#125;</span><br><span class="line"> </span><br><span class="line">      p.next = new IntNode(x, null);</span><br><span class="line">   &#125; ...</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-数组的实现-ArrayList"><a href="#4-数组的实现-ArrayList" class="headerlink" title="4 数组的实现 - ArrayList"></a>4 数组的实现 - ArrayList</h2><p>同样的，我们想使用数组来实现list，就需要知道数组的特点。</p>
+<ul>
+<li>数组是固定长度的；</li>
+<li>数组的每个元素都是同样的类型，一个挨着一个排列；</li>
+<li>访问数组的元素，通过元素的索引就可以访问到，很快；</li>
+<li>在数组前面添加元素很慢，在后面添加很快；</li>
+<li>在数组中间插入和删除元素，很慢。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/12_course/cs61b/2018-05-06-list-01/" data-id="ck2yu6vtj001g2gtr40slhwp3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/14/12_course/cs61b/2018-07-13-Heap%20and%20Priority%20Queue/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          12_course/cs61b/2018-07-13-Heap and Priority Queue
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/14/12_course/cs61b/2018-05-06-deque-ArrayDeque/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">12_course/cs61b/2018-05-06-deque-ArrayDeque</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80-JAVA/">编程语言-JAVA</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 10px;">Java</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-07-13-Heap%20and%20Priority%20Queue/">12_course/cs61b/2018-07-13-Heap and Priority Queue</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-list-01/">12_course/cs61b/2018-05-06-list-01</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-deque-ArrayDeque/">12_course/cs61b/2018-05-06-deque-ArrayDeque</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-Abstract%20Data%20Structure/">12_course/cs61b/2018-05-06-Abstract Data Structure</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61a/2017-03-22-SICP-lecture15%20Objects/">12_course/cs61a/2017-03-22-SICP-lecture15 Objects</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 lrouter<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

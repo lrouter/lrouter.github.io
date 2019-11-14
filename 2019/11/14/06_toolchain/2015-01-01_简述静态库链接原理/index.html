@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>06_toolchain/2015-01-01_简述静态库链接原理 | lrouter的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文主要讲述了基于目标文件（object文件）生成静态库，以及将静态库链接进可执行文件。 object文件的后缀名为.o。 示例代码123456789101112131415161718192021&#x2F;&#x2F; lib&#x2F;mylib.cint sum(int a, int b) &amp;#123;    return a + b;&amp;#125;&#x2F;&#x2F; src&#x2F;module.cint hello() &amp;#123;  p">
+<meta name="keywords" content="云计算 linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="06_toolchain&#x2F;2015-01-01_简述静态库链接原理">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;14&#x2F;06_toolchain&#x2F;2015-01-01_%E7%AE%80%E8%BF%B0%E9%9D%99%E6%80%81%E5%BA%93%E9%93%BE%E6%8E%A5%E5%8E%9F%E7%90%86&#x2F;index.html">
+<meta property="og:site_name" content="lrouter的博客">
+<meta property="og:description" content="本文主要讲述了基于目标文件（object文件）生成静态库，以及将静态库链接进可执行文件。 object文件的后缀名为.o。 示例代码123456789101112131415161718192021&#x2F;&#x2F; lib&#x2F;mylib.cint sum(int a, int b) &amp;#123;    return a + b;&amp;#125;&#x2F;&#x2F; src&#x2F;module.cint hello() &amp;#123;  p">
+<meta property="og:locale" content="cn-zh">
+<meta property="og:image" content="http:&#x2F;&#x2F;codemacro.com&#x2F;assets&#x2F;res&#x2F;link-process.png">
+<meta property="og:updated_time" content="2018-02-20T15:44:36.388Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;codemacro.com&#x2F;assets&#x2F;res&#x2F;link-process.png">
+  
+    <link rel="alternate" href="/atom.xml" title="lrouter的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">lrouter的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-06_toolchain/2015-01-01_简述静态库链接原理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/06_toolchain/2015-01-01_%E7%AE%80%E8%BF%B0%E9%9D%99%E6%80%81%E5%BA%93%E9%93%BE%E6%8E%A5%E5%8E%9F%E7%90%86/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.549Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      06_toolchain/2015-01-01_简述静态库链接原理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文主要讲述了基于目标文件（object文件）生成静态库，以及将静态库链接进可执行文件。</p>
+<p>object文件的后缀名为.o。</p>
+<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// lib/mylib.c</span><br><span class="line">int sum(int a, int b) &#123;</span><br><span class="line">    return a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// src/module.c</span><br><span class="line">int hello() &#123;</span><br><span class="line">  printf(&quot;helo. \r\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// src/main.c</span><br><span class="line">#include &quot;mylib.h&quot;</span><br><span class="line">#include &quot;module.h&quot;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    printf(&quot;main\n&quot;);</span><br><span class="line">    hello();</span><br><span class="line">    printf(&quot;sum: %d\n&quot;, sum(2, 3));</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="静态库的文件格式"><a href="#静态库的文件格式" class="headerlink" title="静态库的文件格式"></a>静态库的文件格式</h2><p>静态库和动态库不同，生成静态库的过程只是将一堆目标文件打包而已，不做符号重定位的处理。</p>
+<p>静态库没有标准，不同linux下都会有细微的差别，大致的格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Global header</span><br><span class="line">-----------------        +-------------------------------</span><br><span class="line">File header 1       ---&gt; | File name</span><br><span class="line">File content 1  |        | File modification timestamp </span><br><span class="line">-----------------        | Owner ID</span><br><span class="line">File header 2            | Group ID</span><br><span class="line">File content 2           | File mode</span><br><span class="line">-----------------        | File size in bytes</span><br><span class="line">...                      | File magic</span><br><span class="line">                         +-------------------------------</span><br></pre></td></tr></table></figure>
+
+<p>File header的很多字段时ASCII码，可以使用文本编辑器打开。</p>
+<p>可见，静态库就是使用ar命令，打包一堆.o文件，最后生成一个.a归档文件。</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#ar cvs libtest.a test1.o test2.o test3.o</span><br></pre></td></tr></table></figure>
+
+<h2 id="程序的链接过程"><a href="#程序的链接过程" class="headerlink" title="程序的链接过程"></a>程序的链接过程</h2><p>使用gcc编译工具链中的ld工具，链接静态库时，和链接一般的.o文件相似。链接过程如下图所示：</p>
+<p><img src="http://codemacro.com/assets/res/link-process.png" alt="链接过程" title="linker process"></p>
+<p>这幅图展示了基于目标文件，main.o和xml.o，以及静态库libmylib.a，链接生成可执行程序test的过程。</p>
+<p>链接使用的命令如下，我们做了修正，将-lmylib放在最后，这样符合一般的写法。原因我们后面会介绍。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -L../lib -o test main.o module.o -lmylib</span><br></pre></td></tr></table></figure>
+<ul>
+<li>-L选项指定了链接时搜索库文件的路径；</li>
+<li>-o选项指定了可执行文件的名字；</li>
+<li>-l选项，指定了需要链接哪些库。libmylib.a写为lmylib。如果为动态库，写法一样。</li>
+</ul>
+<p>链接的过程为：</p>
+<h3 id="建立两张table"><a href="#建立两张table" class="headerlink" title="建立两张table"></a>建立两张table</h3><p>表1 unresolved symbol table，和表2 global symbol table；引用的函数或者全局变量的符号放在表。定义的全局函数或者变量原型符号放在表2。</p>
+<h3 id="按顺序遍历目标文件和库文件"><a href="#按顺序遍历目标文件和库文件" class="headerlink" title="按顺序遍历目标文件和库文件"></a>按顺序遍历目标文件和库文件</h3><p><strong>搜索main.o</strong></p>
+<p>将main.c中定义的函数和全局变量放在表2中，将引用的其他文件的函数或者变量放在表1中，就是图中的sum函数。</p>
+<p><strong>搜索xml.o</strong></p>
+<p>如果xml.o中定义的符号，存在于表1中，那么将其从表1中删除。</p>
+<p>xml.o中定义的符号，加入到表2中。如果有重复定义，增加计数。</p>
+<p>xml.o中引用的函数或者全局变量符号，加入到表1中。</p>
+<p><strong>搜索libmylib.a</strong></p>
+<p>在-L选项指定的路径下搜索libmylib.a文件。如果找不到该文件，则在gcc的环境变量LIBRARY_PATH指定的路径中搜索。如果还找不到，则继续去系统的内定目录内/lib，/usr/lib，/usr/local/lib（64位系统时，改为lib64）。这是当初gcc内定的。</p>
+<p>找不到libmylib.a文件就报错。</p>
+<p>找到了libmylib.a文件之后，就解包这个.a文件，并遍历其中的.o文件。</p>
+<p>过程和上面的main.o和xml.o类似。如果静态库中的.o文件，不包含程序引用的符号，那么该.o文件就会被bypass。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>如果表1 unresolved symbol table非空，报错：符号未定义。<br>如果表2 global symbol table中存在重复定义的符号，报错：重复定义的符号。</p>
+<p>没有错误，那么合并对应的代码段和数据段，生成1个可执行文件。</p>
+<h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><h3 id="链接顺序"><a href="#链接顺序" class="headerlink" title="链接顺序"></a>链接顺序</h3><p>gcc在链接时，是按照命令行给出的顺序来搜索对应符号的。</p>
+<p>例如上面的示例代码中，main.c调用了sum函数，hello函数是在mylib.c中定义的。如果我们链接时这样写:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -L../lib -o test -lmylib main.o module.o</span><br></pre></td></tr></table></figure>
+<p>那么就会报找不到hello函数的问题。</p>
+<p>怎么解决这个问题？调整库的链接顺序可以解决大部分问题，但当静态库之间存在环形依赖时，则无法通过调整顺序来解决。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-whole-archive</span><br></pre></td></tr></table></figure>
+<p>-whole-archive选项告诉链接器把静态库中的所有.o都进行链接，针对以上例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ g++ -o test -L. test.o -Wl,--whole-archive -lfn main.o -Wl,--no-whole-archive</span><br><span class="line">$ ./test</span><br><span class="line">Lib ctor</span><br><span class="line">Test ctor</span><br><span class="line">main</span><br><span class="line">sum: 5</span><br></pre></td></tr></table></figure>
+<p>连lib.o也被链接了进来。-Wl选项告诉gcc将其作为链接器参数传入；之所以在命令行结尾加上<code>--no-whole-archive</code>是为了告诉编译器不要链接gcc默认的库</p>
+<p>可以看出这个方法还是有点暴力了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">–start-group</span><br></pre></td></tr></table></figure>
+<p>格式为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--start-group archives --end-group</span><br></pre></td></tr></table></figure>
+<p>位于–start-group –end-group中的所有静态库将被反复搜索，而不是默认的只搜索一次，直到不再有新的unresolved symbol产生为止。也就是说，出现在这里的.o如果发现有unresolved symbol，则可能回到之前的静态库中继续搜索。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ g++ -o test -L. test.o -Wl,--start-group -lfn main.o -Wl,--end-group</span><br><span class="line">$ ./test</span><br><span class="line">Test ctor</span><br><span class="line">main</span><br><span class="line">sum: 5</span><br></pre></td></tr></table></figure>
+<h3 id="库的嵌套"><a href="#库的嵌套" class="headerlink" title="库的嵌套"></a>库的嵌套</h3><p>由于ar创建静态库时本质上只是对文件进行打包，所以甚至可以创建一个嵌套的静态库，从而测试链接器是否会递归处理静态库中的.o。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ar -r libmylib.a mylib.o</span><br><span class="line">$ ar -r liboutmylib.a libmylib.a lib.o</span><br><span class="line">$ gcc -o test -L../lib test.o main.o -liboutmylib</span><br><span class="line">main.o: In function `main&apos;:</span><br><span class="line">main.cpp:(.text+0x19): undefined reference to `sum(int, int)&apos;</span><br><span class="line">collect2: ld returned 1 exit status</span><br></pre></td></tr></table></figure>
+
+<p>可见gcc链接器并不会递归处理静态库中的文件。</p>
+<p>之所以要提到嵌套静态库这个问题，是因为我发现很多时候我们喜欢为一个静态库工程链接其他静态库。</p>
+<p>当然，这里的链接并非真正的链接（仅是打包），这个过程当然可以聪明到将其他静态库里的.o提取出来然后打包到新的静态库。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/06_toolchain/2015-01-01_%E7%AE%80%E8%BF%B0%E9%9D%99%E6%80%81%E5%BA%93%E9%93%BE%E6%8E%A5%E5%8E%9F%E7%90%86/" data-id="ck2yu6vt200102gtresmg2fza" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/14/07_database/2015-09-08-oracle%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          07_database/2015-09-08-oracle数据库常用命令
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/14/06_toolchain/2015-01-01_%E7%AE%80%E8%BF%B0gcc%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5%E8%BF%87%E7%A8%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">06_toolchain/2015-01-01_简述gcc编译链接过程</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80-JAVA/">编程语言-JAVA</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 10px;">Java</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-07-13-Heap%20and%20Priority%20Queue/">12_course/cs61b/2018-07-13-Heap and Priority Queue</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-list-01/">12_course/cs61b/2018-05-06-list-01</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-deque-ArrayDeque/">12_course/cs61b/2018-05-06-deque-ArrayDeque</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-Abstract%20Data%20Structure/">12_course/cs61b/2018-05-06-Abstract Data Structure</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61a/2017-03-22-SICP-lecture15%20Objects/">12_course/cs61a/2017-03-22-SICP-lecture15 Objects</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 lrouter<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

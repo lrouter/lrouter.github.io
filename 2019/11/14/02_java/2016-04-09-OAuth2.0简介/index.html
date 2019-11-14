@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>02_java/2016-04-09-OAuth2.0简介 | lrouter的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="2. 名词3. OAuth概要OAuth在“客户端”和“服务器提供商”之间，设计了一个授权层。 客户端只能登录授权层，而不能直接去登录“服务器提供商”获取用户的资源。 但是用户可以直接登录“服务器提供商”获取用户的资源。这样客户端和用户就区分开了。 “客户端”登录授权层所用的令牌（token），与用户登录所用的密码不同。 用户可以登录到“服务器提供商”之后，指定授权层token的权限范围，和有效期">
+<meta name="keywords" content="云计算 linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="02_java&#x2F;2016-04-09-OAuth2.0简介">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;14&#x2F;02_java&#x2F;2016-04-09-OAuth2.0%E7%AE%80%E4%BB%8B&#x2F;index.html">
+<meta property="og:site_name" content="lrouter的博客">
+<meta property="og:description" content="2. 名词3. OAuth概要OAuth在“客户端”和“服务器提供商”之间，设计了一个授权层。 客户端只能登录授权层，而不能直接去登录“服务器提供商”获取用户的资源。 但是用户可以直接登录“服务器提供商”获取用户的资源。这样客户端和用户就区分开了。 “客户端”登录授权层所用的令牌（token），与用户登录所用的密码不同。 用户可以登录到“服务器提供商”之后，指定授权层token的权限范围，和有效期">
+<meta property="og:locale" content="cn-zh">
+<meta property="og:image" content="http:&#x2F;&#x2F;www.ruanyifeng.com&#x2F;blogimg&#x2F;asset&#x2F;2014&#x2F;bg2014051203.png">
+<meta property="og:updated_time" content="2018-05-05T16:50:08.491Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;www.ruanyifeng.com&#x2F;blogimg&#x2F;asset&#x2F;2014&#x2F;bg2014051203.png">
+  
+    <link rel="alternate" href="/atom.xml" title="lrouter的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">lrouter的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-02_java/2016-04-09-OAuth2.0简介" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/14/02_java/2016-04-09-OAuth2.0%E7%AE%80%E4%BB%8B/" class="article-date">
+  <time datetime="2019-11-14T14:55:07.455Z" itemprop="datePublished">2019-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      02_java/2016-04-09-OAuth2.0简介
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="2-名词"><a href="#2-名词" class="headerlink" title="2. 名词"></a>2. 名词</h2><h2 id="3-OAuth概要"><a href="#3-OAuth概要" class="headerlink" title="3. OAuth概要"></a>3. OAuth概要</h2><p>OAuth在“客户端”和“服务器提供商”之间，设计了一个授权层。</p>
+<p>客户端只能登录授权层，而不能直接去登录“服务器提供商”获取用户的资源。</p>
+<p>但是用户可以直接登录“服务器提供商”获取用户的资源。这样客户端和用户就区分开了。</p>
+<p>“客户端”登录授权层所用的令牌（token），与用户登录所用的密码不同。</p>
+<p>用户可以登录到“服务器提供商”之后，指定授权层token的权限范围，和有效期。</p>
+<h2 id="4-运行流程"><a href="#4-运行流程" class="headerlink" title="4. 运行流程"></a>4. 运行流程</h2><p>OAuth的运行流程，包括以下几个步骤：</p>
+<blockquote>
+<ol>
+<li>用户打开客户端，客户端请求用户授权</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li>用户同意授权</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3">
+<li>客户端使用上一步获得的授权，向认证服务器申请令牌</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="4">
+<li>认证服务器对客户端进行认证，认证成功之后，同意发放令牌</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="5">
+<li>客户端接收令牌，使用令牌向服务器提供商请求资源</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="6">
+<li>服务器提供商返回资源</li>
+</ol>
+</blockquote>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2014/bg2014051203.png" alt="运行流程" title="运行流程"></p>
+<p>可以看到第1-4步，是客户端申请用户授权并从服务器获得令牌，之后才能访问资源。</p>
+<p>那么如何授权，如何获得令牌呢，有以下几种方式。</p>
+<h2 id="5-客户端获取令牌的模式"><a href="#5-客户端获取令牌的模式" class="headerlink" title="5. 客户端获取令牌的模式"></a>5. 客户端获取令牌的模式</h2><blockquote>
+<ul>
+<li>授权码模式（authorization code）</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>简化模式（implicit）</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>密码模式（resource owner password credentials）</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>客户端模式（client credentials)</li>
+</ul>
+</blockquote>
+<h2 id="6-授权码模式"><a href="#6-授权码模式" class="headerlink" title="6. 授权码模式"></a>6. 授权码模式</h2><p>用户访问客户端，客户端将用户导向到认证服务器。</p>
+<p>用户在认证服务器上，确认给予客户端授权。</p>
+<p>认证服务器将用户导向到客户端事先指定的“Redirection URI”，同时附上一个授权码。</p>
+<p>客户端收到授权码，附上早先的“Redirection URI”，向认证服务器申请令牌。这一步由客户端的后台服务器完成，用户不可见。</p>
+<p>认证服务器核对授权码和“Redirection URI”，确认无误，向客户端发送access token和refresh token。</p>
+<h2 id="7-简化模式"><a href="#7-简化模式" class="headerlink" title="7. 简化模式"></a>7. 简化模式</h2><p>简化模式，不通过客户端的后台服务器，直接通过用户的浏览器来申请access token，然后再发送给客户端。</p>
+<p>令牌对用户是可见的，且客户端不需要认证。</p>
+<p>用户访问客户端，客户端将用户导向到认证服务器。</p>
+<p>用户决定给予客户端授权。</p>
+<p>认证服务器将用户导向客户端指定的“Redirection URI”，并在URO的Hash部分包含了access token。</p>
+<p>浏览器向资源服务器发出请求，其中不包括上一步收到的Hash值。</p>
+<p>资源服务器返回一个网页，其中包含的脚本代码可以获取Hash值。</p>
+<p>浏览器执行脚本，获得access token。</p>
+<p>浏览器将access token发给客户端。</p>
+<h2 id="8-密码模式"><a href="#8-密码模式" class="headerlink" title="8. 密码模式"></a>8. 密码模式</h2><h2 id="9-客户端模式"><a href="#9-客户端模式" class="headerlink" title="9. 客户端模式"></a>9. 客户端模式</h2><h2 id="10-更新令牌"><a href="#10-更新令牌" class="headerlink" title="10. 更新令牌"></a>10. 更新令牌</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/14/02_java/2016-04-09-OAuth2.0%E7%AE%80%E4%BB%8B/" data-id="ck2yu6vs000072gtr1ox448kd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/14/02_java/2016-04-10-JSP%20Cookie%E5%92%8CSession%E5%A4%84%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          02_java/2016-04-10-JSP Cookie和Session处理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/14/02_java/2013-06-09-java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_01/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">02_java/2013-06-09-java学习笔记_01</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80-JAVA/">编程语言-JAVA</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 10px;">Java</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-07-13-Heap%20and%20Priority%20Queue/">12_course/cs61b/2018-07-13-Heap and Priority Queue</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-list-01/">12_course/cs61b/2018-05-06-list-01</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-deque-ArrayDeque/">12_course/cs61b/2018-05-06-deque-ArrayDeque</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61b/2018-05-06-Abstract%20Data%20Structure/">12_course/cs61b/2018-05-06-Abstract Data Structure</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/14/12_course/cs61a/2017-03-22-SICP-lecture15%20Objects/">12_course/cs61a/2017-03-22-SICP-lecture15 Objects</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 lrouter<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
