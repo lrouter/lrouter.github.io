@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一 前言本文主要讲解linux系统的内存管理，基于ARM CPU架构。 本文重点描述linux系统的内存空间管理和映射，但不会讲内存分配的算法。 二 物理地址和虚拟地址空间1. ARM处理器所看到的物理地址空间ARM处理器的具体定义，是指由三星、海思、TI、飞思卡尔等公司设计生产的基于ARM IP核的SOC芯片。一个处理器内部，集成了CPU Core、DMA、MMU、PIC等IP，以及UART、T">
+<meta name="keywords" content="云计算 linux 网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="01_linux_kernel&#x2F;linux arm memory">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;14&#x2F;01_linux_kernel&#x2F;linux%20arm%20memory&#x2F;index.html">
+<meta property="og:site_name" content="范开喜的博客">
+<meta property="og:description" content="一 前言本文主要讲解linux系统的内存管理，基于ARM CPU架构。 本文重点描述linux系统的内存空间管理和映射，但不会讲内存分配的算法。 二 物理地址和虚拟地址空间1. ARM处理器所看到的物理地址空间ARM处理器的具体定义，是指由三星、海思、TI、飞思卡尔等公司设计生产的基于ARM IP核的SOC芯片。一个处理器内部，集成了CPU Core、DMA、MMU、PIC等IP，以及UART、T">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-02-20T15:45:44.741Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/14/01_linux_kernel/linux arm memory/"/>
+
+
+
+
+
+  <title>01_linux_kernel/linux arm memory | 范开喜的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">范开喜的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/14/01_linux_kernel/linux%20arm%20memory/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lrouter">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范开喜的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">01_linux_kernel/linux arm memory</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-14T22:55:07+08:00">
+                2019-11-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="一-前言"><a href="#一-前言" class="headerlink" title="一 前言"></a>一 前言</h1><p>本文主要讲解linux系统的内存管理，基于ARM CPU架构。</p>
+<p>本文重点描述linux系统的内存空间管理和映射，但不会讲内存分配的算法。</p>
+<h1 id="二-物理地址和虚拟地址空间"><a href="#二-物理地址和虚拟地址空间" class="headerlink" title="二 物理地址和虚拟地址空间"></a>二 物理地址和虚拟地址空间</h1><h2 id="1-ARM处理器所看到的物理地址空间"><a href="#1-ARM处理器所看到的物理地址空间" class="headerlink" title="1. ARM处理器所看到的物理地址空间"></a>1. ARM处理器所看到的物理地址空间</h2><p>ARM处理器的具体定义，是指由三星、海思、TI、飞思卡尔等公司设计生产的基于ARM IP核的SOC芯片。一个处理器内部，集成了CPU Core、DMA、MMU、PIC等IP，以及UART、TIMER、LED等外设，这颗处理器我们就叫SOC。SOC内部一般会有小size的SRAM、ROM等存储空间，外部也会有DDR等存储空间。</p>
+<p>外设例如UART,会有一些控制寄存器：波特率设置寄存器、数据位和奇偶校验位寄存器，以及RX和TX Data寄存器。TIMER，USB控制器，DDR控制器等外设也同样如此，<br>对于ARM架构的CPU而言，只有一个统一的地址空间，其中一部分空间是给外设寄存器，一部分是给SRAM、ROM，一部分是给DDR等存储器。对于CPU而言，访问外设的寄存器的指令和访问内存的都是相同的。如下图所示：</p>
+<p>正因为外设、DDR的地址等都是存在于统一编址的地址空间内，这个地址空间就是ARM处理器的物理地址空间。<br>例如</p>
+<p>ARM处理器一般支持多种模式，只有处理器处于特权模式下，才可以访问整个的物理地址空间；当处理器处于非特权模式时，</p>
+<h2 id="2-用户应用程序所看到的虚拟地址空间"><a href="#2-用户应用程序所看到的虚拟地址空间" class="headerlink" title="2. 用户应用程序所看到的虚拟地址空间"></a>2. 用户应用程序所看到的虚拟地址空间</h2><h2 id="5-linux内核虚拟地址空间-——-低端内存区域"><a href="#5-linux内核虚拟地址空间-——-低端内存区域" class="headerlink" title="5. linux内核虚拟地址空间 —— 低端内存区域"></a>5. linux内核虚拟地址空间 —— 低端内存区域</h2><p>该区域也称为内核的逻辑地址空间，是从PAGE_OFFSET(3G)到high_mem之间的虚拟地址空间，它映射了全部或者一部分的物理内存。<br>如果系统包含高端内存，则只映射了一部分。</p>
+<p>内核低端内存区域与系统物理内存的低地址空间，是一一映射的。<br>内核逻辑地址空间中的地址与RAM内存物理地址空间中对应的地址只差一个固定偏移量（3G），如果RAM内存物理地址空间从0x00000000地址编址，那么这个偏移量就是PAGE_OFFSET(0xc0000000)。</p>
+<p>系统初始化过程中，将linux内核的低端虚拟内存，永久映射到了物理内存的低地址区域，这些映射是一直存在的。他们之间通过宏来转换：<br><strong>pa(x)和</strong>va(x)，他们等价于：</p>
+<p>__virt_to_phys((unsigned long)(x))</p>
+<p>__phys_to_virt((unsigned long)(x))</p>
+<p>该区域对应的内存分配函数是kmalloc/kfree，和__get_free_page.</p>
+<h3 id="参考资料-1"><a href="#参考资料-1" class="headerlink" title="参考资料 1"></a>参考资料 1</h3><p><a href="https://chengyihe.wordpress.com/2015/07/29/arm-mm-memory-layout/" target="_blank" rel="noopener">https://chengyihe.wordpress.com/2015/07/29/arm-mm-memory-layout/</a></p>
+<h3 id="参考资料-2"><a href="#参考资料-2" class="headerlink" title="参考资料 2"></a>参考资料 2</h3><p><a href="http://blog.csdn.net/xiaojsj111/article/details/11724081" target="_blank" rel="noopener">http://blog.csdn.net/xiaojsj111/article/details/11724081</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/14/README/" rel="next" title="README">
+                <i class="fa fa-chevron-left"></i> README
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/14/01_linux_kernel/2017-10-12_%E8%B0%83%E6%95%B4%E5%86%85%E6%A0%B8%E6%B6%88%E6%81%AF%E6%89%93%E5%8D%B0%E7%BA%A7%E5%88%AB/" rel="prev" title="01_linux_kernel/2017-10-12_调整内核消息打印级别">
+                01_linux_kernel/2017-10-12_调整内核消息打印级别 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lrouter</p>
+              <p class="site-description motion-element" itemprop="description">简单的背后并不简单</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一-前言"><span class="nav-number">1.</span> <span class="nav-text">一 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二-物理地址和虚拟地址空间"><span class="nav-number">2.</span> <span class="nav-text">二 物理地址和虚拟地址空间</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-ARM处理器所看到的物理地址空间"><span class="nav-number">2.1.</span> <span class="nav-text">1. ARM处理器所看到的物理地址空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-用户应用程序所看到的虚拟地址空间"><span class="nav-number">2.2.</span> <span class="nav-text">2. 用户应用程序所看到的虚拟地址空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-linux内核虚拟地址空间-——-低端内存区域"><span class="nav-number">2.3.</span> <span class="nav-text">5. linux内核虚拟地址空间 —— 低端内存区域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料-1"><span class="nav-number">2.3.1.</span> <span class="nav-text">参考资料 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料-2"><span class="nav-number">2.3.2.</span> <span class="nav-text">参考资料 2</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lrouter</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
