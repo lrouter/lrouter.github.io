@@ -261,6 +261,178 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/ovs%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%87%A0%E7%A7%8DOpenflow%E6%89%A9%E5%B1%95%E6%B6%88%E6%81%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lrouter">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="范开喜的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/11/ovs%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%87%A0%E7%A7%8DOpenflow%E6%89%A9%E5%B1%95%E6%B6%88%E6%81%AF/" itemprop="url">ovs实现的几种Openflow扩展消息</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-11T22:48:09+08:00">
+                2019-12-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>前言<br>openflow是一个标准的交换机配置协议，主要用于SDN控制面下发流表给交换机设备。openflow支持很多厂家的交换机，包括硬件白牌交换机，以及openvswitch。</p>
+<p>openflow协议定义了一系列标准的行为，是所有交换机都需要支持的，但是也定义了一些可扩展的行为，由各交换机厂家自己去实现。</p>
+<p>openflow使用“experiment” 类型来描述可扩展的消息，各交换机厂家将自己定义的可扩展消息包含在“experiment” 类型的openflow消息总。</p>
+<p>本文所描述的是openvswitch实现的一些可扩展消息，它们基于 “experiment” 类型的openflow消息。他们也是ovsctl C库和ofpcontroller中会使用到的消息。</p>
+<p>“experiment”消息的格式如下：</p>
+<p>Index    字段    占用空间<br>0    openflow header<br>1    ExperimenterId    uint32<br>2    ExpType    uint32<br>其中 ExperimenterId = 0x00002320，表示 Openvswitch实现的可扩展消息。ExpType定义了具体的消息类型。</p>
+<p>设置 Controller ID 消息<br>ExpType = 20。</p>
+<p>消息体格式为：</p>
+<p>字段    占用空间<br>0    0    6字节<br>1    Controller ID    uint16<br>设置 Packet In format 消息<br>ExpType = 16。</p>
+<p>消息体格式为：</p>
+<p>字段    占用空间<br>0    packet in format    uint32<br>Packet In format的取值如下，支持 userdata 的是 NXPIF_NXT_PACKET_IN2：</p>
+<pre><code>NXPIF_STANDARD       NxPacketInFormat = 0 /* OFPT_PACKET_IN for this OpenFlow version. */
+NXPIF_NXT_PACKET_IN  NxPacketInFormat = 1 /* NXT_PACKET_IN (since OVS v1.1). */
+NXPIF_NXT_PACKET_IN2 NxPacketInFormat = 2 /* NXT_PACKET_IN2 (since OVS v2.6). */</code></pre><p>NXM Packet In 2 消息<br>ExpType = 30。</p>
+<p>消息体格式为ofp propert数组。</p>
+<p>字段    占用空间<br>0    ofp property<br>struct ofpproperty</p>
+<p>struct ofpproperty是一个TLV格式的结构体：</p>
+<p>Type，Length，内容。</p>
+<p>Type    Length    内容<br>其中Type如下：</p>
+<pre><code>/* Packet. */
+NXPINT_PACKET    = 0 /* Raw packet data. */
+NXPINT_FULL_LEN  = 1 /* ovs_be32: Full packet len, if truncated. */
+NXPINT_BUFFER_ID = 2 /* ovs_be32: Buffer ID, if buffered. */
+
+/* Information about the flow that triggered the packet-in. */
+NXPINT_TABLE_ID = 3 /* uint8_t: Table ID. */
+NXPINT_COOKIE   = 4 /* ovs_be64: Flow cookie. */
+
+/* Other. */
+NXPINT_REASON       = 5 /* uint8_t, one of OFPR_*. */
+NXPINT_METADATA     = 6 /* NXM or OXM for metadata fields. */
+NXPINT_USERDATA     = 7 /* From NXAST_CONTROLLER2 userdata. */
+NXPINT_CONTINUATION = 8 /* Private data for continuing processing. */</code></pre><p>对应 Type 内容的格式待补充。</p>
+<p>其中 length 是内容长度+头部的字节数，一般是头部长度 = 4。对于 experimenter ofpproperty，头部长度是 = 12。</p>
+<p>每个struct ofpproperty 占用的内存大小是 8 字节的整数倍，所以内容后面可能存在一定长度的 pad，内容为0。pad 的长度是 length 取整到8的整数倍之后减去 length 的结果。</p>
+<p>补充下 Type = NXPINT_METADATA 的格式：</p>
+<p>这种 Type 里面存储的数据是 flow 的 match 部分。ovs 支持 可扩展格式的 match，在 ovs 不支持可扩展 match 的时候，nirica 自己定义了一种可扩展 match 结构体格式 叫 nxm_match，后面 openflow 基于 nirica 的成果也定义出了可扩展的 match 格式叫 oxm_match。</p>
+<p>现在我们使用的openflow 1.3，所以里面表达的是oxm_match。</p>
+<p>NXPINT_METADATA 对应的内容也是一系列 类似TLV格式的结构体：</p>
+<p>头部    内容<br>头部的格式为：</p>
+<ul>
+<li>::</li>
+<li></li>
+<li>+———————————-+—————+–+——————+</li>
+<li>|            oxm_class             |   oxm_field   |hm|    oxm_length    |</li>
+<li>+———————————-+—————+–+——————+</li>
+<li></li>
+<li>The oxm_class value of OFPXMC_NXM_0 or OFPXMC_NXM_1 can be used an</li>
+<li>OpenFlow 1.2+ message to use a Nicira ‘nxm_field’ otherwise standard</li>
+<li>OpenFlow fields are used when the oxm_class has a value of</li>
+<li>OFPXMC_OPENFLOW_BASIC.</li>
+</ul>
+<p>oxm_length为内容的字节数。<br>对于match中的in_port栏位，oxm_class  = 0, oxm_field = 0, hm = 0.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/14/12_course/cs61b/2018-07-13-Heap%20and%20Priority%20Queue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1718,126 +1890,6 @@ def make_withdraw_var(balance):
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/14/09_%E5%B5%8C%E5%85%A5%E5%BC%8F/2017-03-29-%E6%8F%90%E5%8F%96%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E7%AC%ACn%E5%92%8Cm%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B9%8B%E9%97%B4%E7%9A%84%E6%89%80%E6%9C%89%E8%A1%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lrouter">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="范开喜的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/14/09_%E5%B5%8C%E5%85%A5%E5%BC%8F/2017-03-29-%E6%8F%90%E5%8F%96%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E7%AC%ACn%E5%92%8Cm%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B9%8B%E9%97%B4%E7%9A%84%E6%89%80%E6%9C%89%E8%A1%8C/" itemprop="url">09_嵌入式/2017-03-29-提取日志文件中的第n和m个字符之间的所有行</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-14T22:55:07+08:00">
-                2019-11-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="1-将所有的换行符替换成"><a href="#1-将所有的换行符替换成" class="headerlink" title="1.将所有的换行符替换成/"></a>1.将所有的换行符替换成/</h1><h1 id="2-将所有的tab替换成换行"><a href="#2-将所有的tab替换成换行" class="headerlink" title="2.将所有的tab替换成换行"></a>2.将所有的tab替换成换行</h1><h1 id="3-打印出-321311000，321312000-之间的行"><a href="#3-打印出-321311000，321312000-之间的行" class="headerlink" title="3.打印出[321311000，321312000]之间的行"></a>3.打印出[32<em>1311000，32</em>1312000]之间的行</h1><h1 id="4-将换行符替换成tab"><a href="#4-将换行符替换成tab" class="headerlink" title="4.将换行符替换成tab"></a>4.将换行符替换成tab</h1><h1 id="5-将-替换成换行符"><a href="#5-将-替换成换行符" class="headerlink" title="5.将^替换成换行符"></a>5.将^替换成换行符</h1><p>tr ‘\n’ ‘/‘ &lt; file | tr ‘\t’ ‘\n’ | tail -n +41952000 | head -n  32000 | tr ‘\n’ ‘\t’ | tr ‘/‘ ‘\n’ &gt; result.txt</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1888,7 +1940,7 @@ def make_withdraw_var(balance):
               
                 <a href="/archives%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1910,7 +1962,7 @@ def make_withdraw_var(balance):
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
